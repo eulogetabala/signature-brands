@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { Marquee } from "@/components/Marquee";
 import heroChrome from "@/assets/hero-chrome.jpg";
+import heroParticles from "@/assets/hero-particles.jpg";
+import heroSilk from "@/assets/hero-silk.jpg";
 import workArchitecture from "@/assets/work-architecture.jpg";
 import workLiquid from "@/assets/work-liquid.jpg";
 
