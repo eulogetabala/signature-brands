@@ -43,7 +43,9 @@
   /* Signature Brand tokens */
   --brand-black: oklch(0.13 0 0);
   --brand-white: oklch(0.97 0 0);
-  --brand-accent: oklch(0.68 0.21 35);
+  --brand-accent: oklch(0.72 0.11 75);
+  --brand-accent-deep: oklch(0.55 0.10 65);
+  --gradient-gold: linear-gradient(135deg, oklch(0.55 0.10 65), oklch(0.82 0.13 85), oklch(0.55 0.10 65));
 
   --background: var(--brand-black);
   --foreground: var(--brand-white);
@@ -104,6 +106,17 @@
     -webkit-text-stroke: 1px var(--brand-white);
     color: transparent;
   }
+  .text-gold-gradient {
+    background: var(--gradient-gold);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gold-shimmer 6s ease-in-out infinite;
+  }
+  .bg-gold-gradient {
+    background: var(--gradient-gold);
+  }
 }
 
 @keyframes float {
@@ -126,6 +139,40 @@
   from { transform: scale(1.04); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+@keyframes ken-burns {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.18) translate(-2%, -1%); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+@keyframes ken-burns-alt {
+  0% { transform: scale(1.1) translate(0, 0) rotate(0deg); }
+  50% { transform: scale(1.25) translate(3%, 2%) rotate(1deg); }
+  100% { transform: scale(1.1) translate(0, 0) rotate(0deg); }
+}
+@keyframes drift-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
+}
+@keyframes drift-x {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(20px); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes gold-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes pulse-gold {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+@keyframes blink-cursor {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
 
 .animate-float { animation: float 6s ease-in-out infinite; }
 .animate-marquee { animation: marquee 28s linear infinite; }
@@ -133,3 +180,11 @@
 .animate-reveal { animation: reveal-up 1s cubic-bezier(0.16, 1, 0.3, 1) both; }
 .animate-fade-in { animation: fade-in 1s ease-out both; }
 .animate-scale-in { animation: scale-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-ken-burns { animation: ken-burns 18s ease-in-out infinite; }
+.animate-ken-burns-alt { animation: ken-burns-alt 22s ease-in-out infinite; }
+.animate-drift-y { animation: drift-y 9s ease-in-out infinite; }
+.animate-drift-x { animation: drift-x 11s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 40s linear infinite; }
+.animate-pulse-gold { animation: pulse-gold 4s ease-in-out infinite; }
+.animate-blink { animation: blink-cursor 1s steps(1) infinite; }
+
