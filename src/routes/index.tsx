@@ -22,66 +22,98 @@ export const Route = createFileRoute("/")({
 function Home() {
   return (
     <PageShell>
-      {/* HERO */}
+      {/* HERO — animated gold cinematic */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-32">
-        {/* floating frame */}
-        <div className="absolute top-[18%] left-6 md:left-16 w-44 md:w-64 h-64 md:h-96 opacity-30 border border-brand-white/20 animate-float pointer-events-none" />
-        <div className="absolute bottom-[12%] right-6 md:right-24 w-32 h-44 opacity-20 border border-brand-accent animate-float pointer-events-none [animation-delay:-3s]" />
+        {/* Layered animated background */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={heroParticles}
+            alt=""
+            aria-hidden
+            className="absolute inset-0 w-full h-full object-cover opacity-60 animate-ken-burns-alt"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-black/40 via-brand-black/60 to-brand-black" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,transparent_0%,var(--brand-black)_80%)]" />
+        </div>
+
+        {/* Silk ribbon — left parallax */}
+        <div className="hidden md:block absolute -left-20 top-10 w-[40%] h-[110%] z-[1] opacity-70 animate-drift-y pointer-events-none">
+          <img
+            src={heroSilk}
+            alt=""
+            aria-hidden
+            className="w-full h-full object-cover mix-blend-screen animate-ken-burns"
+          />
+        </div>
+
+        {/* Chrome sculpture — right parallax */}
+        <div className="hidden lg:block absolute right-0 top-0 w-[38%] h-full z-[1] opacity-90 animate-drift-y [animation-delay:-4s] pointer-events-none">
+          <img
+            src={heroChrome}
+            alt=""
+            aria-hidden
+            className="w-full h-full object-cover animate-ken-burns-alt"
+          />
+          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-brand-black/30 to-brand-black" />
+        </div>
+
+        {/* Decorative frames */}
+        <div className="absolute top-[22%] left-6 md:left-16 w-44 md:w-56 h-56 md:h-80 opacity-30 border border-brand-accent/50 animate-float pointer-events-none z-[2]" />
+        <div className="absolute bottom-[14%] right-6 md:right-24 w-32 h-44 opacity-25 border border-brand-accent animate-float pointer-events-none [animation-delay:-3s] z-[2]" />
+
+        {/* Slow spinning gold ring */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vmin] h-[90vmin] rounded-full border border-brand-accent/15 animate-spin-slow pointer-events-none z-[2]">
+          <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-brand-accent animate-pulse-gold" />
+          <span className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-2 h-2 rounded-full bg-brand-accent/70" />
+        </div>
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col items-center text-center">
-            <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-brand-accent mb-6 animate-reveal">
-              Creative Agency — EST. 2024
+            <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-brand-accent mb-6 animate-reveal flex items-center gap-3">
+              <span className="w-8 h-px bg-brand-accent" />
+              Signature Brand — EST. 2024
+              <span className="w-8 h-px bg-brand-accent" />
             </span>
-            <h1 className="font-display text-[18vw] md:text-[12vw] leading-[0.85] font-extrabold uppercase tracking-tighter mb-8 animate-reveal [animation-delay:120ms]">
-              Pure <br />
-              <span className="text-outline">Emotion</span>
+            <h1 className="font-display text-[18vw] md:text-[12vw] leading-[0.82] font-extrabold uppercase tracking-tighter mb-4 animate-reveal [animation-delay:120ms]">
+              <span className="block">Votre</span>
+              <span className="block text-gold-gradient">Signature</span>
+              <span className="block text-outline">Visuelle<span className="text-brand-accent animate-blink">.</span></span>
             </h1>
 
-            <div className="hidden lg:block absolute right-0 lg:right-6 xl:right-16 top-1/2 -translate-y-1/2 w-64 xl:w-72 animate-scale-in [animation-delay:400ms]">
-              <div className="overflow-hidden bg-neutral-900 rounded-sm shadow-2xl">
-                <img
-                  src={heroChrome}
-                  alt="Sculpture chrome — vision Signature Brand"
-                  width={800}
-                  height={1024}
-                  className="w-full aspect-[3/4] object-cover hover:scale-105 transition-transform duration-1000"
-                />
-              </div>
-              <p className="text-[10px] mt-4 uppercase tracking-[0.3em] text-brand-accent">
-                Branding / Digital / Art
-              </p>
-            </div>
-
-            <p className="max-w-xl text-base md:text-lg text-brand-white/60 leading-relaxed font-light mt-10 animate-reveal [animation-delay:300ms]">
-              Nous ne créons pas de sites, nous bâtissons des empires visuels. Signature Brand
-              est l'agence des marques qui refusent l'ordinaire.
+            <p className="max-w-xl text-base md:text-lg text-brand-white/70 leading-relaxed font-light mt-10 animate-reveal [animation-delay:300ms]">
+              Une agence de communication qui sculpte des identités précieuses comme l'or.
+              Branding, digital et contenu pour des marques qui refusent l'ordinaire.
             </p>
 
             <div className="mt-12 flex flex-wrap gap-4 justify-center animate-reveal [animation-delay:500ms]">
               <Link
                 to="/projets"
-                className="px-8 py-4 bg-brand-accent text-brand-white text-xs uppercase tracking-widest font-medium hover:bg-brand-white hover:text-brand-black transition-colors"
+                className="px-8 py-4 bg-gold-gradient text-brand-black text-xs uppercase tracking-widest font-semibold transition-transform hover:scale-[1.03]"
               >
                 Voir les projets
               </Link>
               <Link
                 to="/contact"
-                className="px-8 py-4 border border-brand-white/30 text-xs uppercase tracking-widest font-medium hover:border-brand-accent hover:text-brand-accent transition-colors"
+                className="px-8 py-4 border border-brand-accent/50 text-xs uppercase tracking-widest font-medium hover:bg-brand-accent hover:text-brand-black transition-all"
               >
                 Démarrer un projet
               </Link>
             </div>
+
+            <div className="mt-20 flex flex-col items-center gap-2 animate-reveal [animation-delay:700ms]">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-brand-white/40">Scroll</span>
+              <span className="w-px h-12 bg-gradient-to-b from-brand-accent to-transparent animate-pulse-gold" />
+            </div>
           </div>
         </div>
 
-        {/* background marquee */}
-        <div className="absolute bottom-6 left-0 w-full opacity-[0.06] select-none pointer-events-none">
-          <div className="font-display font-black uppercase text-[18vh] leading-none">
-            <Marquee text="Signature Agency · Signature Agency ·" />
+        <div className="absolute bottom-2 left-0 w-full opacity-[0.08] select-none pointer-events-none z-[2]">
+          <div className="font-display font-black uppercase text-[14vh] leading-none text-gold-gradient">
+            <Marquee text="Signature ✦ Brand ✦ Signature ✦ Brand ✦" />
           </div>
         </div>
       </section>
+
 
       {/* SERVICES */}
       <section className="py-32 px-6 bg-brand-white text-brand-black">
