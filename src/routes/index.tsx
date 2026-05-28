@@ -1,225 +1,187 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
-import { Marquee } from "@/components/Marquee";
-import heroChrome from "@/assets/hero-chrome.jpg";
-import heroParticles from "@/assets/hero-particles.jpg";
-import heroSilk from "@/assets/hero-silk.jpg";
-import workArchitecture from "@/assets/work-architecture.jpg";
-import workLiquid from "@/assets/work-liquid.jpg";
+import { EcosystemSection } from "@/components/EcosystemSection";
+import { useState, useEffect, useCallback } from "react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ApproachSection } from "@/components/ApproachSection";
+import { ExpertiseSection } from "@/components/ExpertiseSection";
+import { FeaturedCreationsSection } from "@/components/FeaturedCreationsSection";
+import { heroSlides } from "@/data/site-content";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Signature Brand — Agence de communication créative" },
-      { name: "description", content: "L'agence des marques qui refusent l'ordinaire. Identité, digital, contenu." },
-      { property: "og:title", content: "Signature Brand — Agence de communication" },
-      { property: "og:description", content: "L'agence des marques qui refusent l'ordinaire." },
+      { title: "Signature Brand — Creative Communication Agency" },
+      { name: "description", content: "The agency for brands that refuse the ordinary. Identity, digital, and content." },
+      { property: "og:title", content: "Signature Brand — Creative Communication Agency" },
+      { property: "og:description", content: "The agency for brands that refuse the ordinary." },
     ],
   }),
   component: Home,
 });
 
 function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [textKey, setTextKey] = useState(0);
+  const goToSlide = useCallback((index: number) => {
+    setCurrentSlide(index);
+    setTextKey((k) => k + 1);
+  }, []);
+
+  const nextSlide = useCallback(() => {
+    goToSlide((currentSlide + 1) % heroSlides.length);
+  }, [currentSlide, goToSlide]);
+
+  const prevSlide = useCallback(() => {
+    goToSlide((currentSlide - 1 + heroSlides.length) % heroSlides.length);
+  }, [currentSlide, goToSlide]);
+
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 7000);
+    return () => clearInterval(interval);
+  }, [nextSlide]);
+
+  const slide = heroSlides[currentSlide];
+
   return (
     <PageShell>
-      {/* HERO — animated gold cinematic */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-32">
-        {/* Layered animated background */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src={heroParticles}
-            alt=""
-            aria-hidden
-            className="absolute inset-0 w-full h-full object-cover opacity-60 animate-ken-burns-alt"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-black/40 via-brand-black/60 to-brand-black" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,transparent_0%,var(--brand-black)_80%)]" />
-        </div>
+      <style>{`
+        @keyframes slideTextUp {
+          from { opacity: 0; transform: translateY(40px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideTagIn {
+          from { opacity: 0; transform: translateX(-20px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes progressBar {
+          from { width: 0%; }
+          to { width: 100%; }
+        }
+        .anim-tag { animation: slideTagIn 0.6s ease-out 0.1s both; }
+        .anim-title { animation: slideTextUp 0.7s ease-out 0.2s both; }
+        .anim-title2 { animation: slideTextUp 0.7s ease-out 0.35s both; }
+        .anim-desc { animation: slideTextUp 0.6s ease-out 0.5s both; }
+        .anim-cta { animation: slideTextUp 0.6s ease-out 0.65s both; }
+        .anim-progress { animation: progressBar 7s linear forwards; }
+      `}</style>
 
-        {/* Silk ribbon — left parallax */}
-        <div className="hidden md:block absolute -left-20 top-10 w-[40%] h-[110%] z-[1] opacity-70 animate-drift-y pointer-events-none">
-          <img
-            src={heroSilk}
-            alt=""
-            aria-hidden
-            className="w-full h-full object-cover mix-blend-screen animate-ken-burns"
-          />
-        </div>
-
-        {/* Chrome sculpture — right parallax */}
-        <div className="hidden lg:block absolute right-0 top-0 w-[38%] h-full z-[1] opacity-90 animate-drift-y [animation-delay:-4s] pointer-events-none">
-          <img
-            src={heroChrome}
-            alt=""
-            aria-hidden
-            className="w-full h-full object-cover animate-ken-burns-alt"
-          />
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-brand-black/30 to-brand-black" />
-        </div>
-
-        {/* Decorative frames */}
-        <div className="absolute top-[22%] left-6 md:left-16 w-44 md:w-56 h-56 md:h-80 opacity-30 border border-brand-accent/50 animate-float pointer-events-none z-[2]" />
-        <div className="absolute bottom-[14%] right-6 md:right-24 w-32 h-44 opacity-25 border border-brand-accent animate-float pointer-events-none [animation-delay:-3s] z-[2]" />
-
-        {/* Slow spinning gold ring */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vmin] h-[90vmin] rounded-full border border-brand-accent/15 animate-spin-slow pointer-events-none z-[2]">
-          <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-brand-accent animate-pulse-gold" />
-          <span className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-2 h-2 rounded-full bg-brand-accent/70" />
-        </div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="flex flex-col items-center text-center">
-            <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-brand-accent mb-6 animate-reveal flex items-center gap-3">
-              <span className="w-8 h-px bg-brand-accent" />
-              Signature Brand — EST. 2024
-              <span className="w-8 h-px bg-brand-accent" />
-            </span>
-            <h1 className="font-display text-[18vw] md:text-[12vw] leading-[0.82] font-extrabold uppercase tracking-tighter mb-4 animate-reveal [animation-delay:120ms]">
-              <span className="block">Votre</span>
-              <span className="block text-gold-gradient">Signature</span>
-              <span className="block text-outline">Visuelle<span className="text-brand-accent animate-blink">.</span></span>
-            </h1>
-
-            <p className="max-w-xl text-base md:text-lg text-brand-white/70 leading-relaxed font-light mt-10 animate-reveal [animation-delay:300ms]">
-              Une agence de communication qui sculpte des identités précieuses comme l'or.
-              Branding, digital et contenu pour des marques qui refusent l'ordinaire.
-            </p>
-
-            <div className="mt-12 flex flex-wrap gap-4 justify-center animate-reveal [animation-delay:500ms]">
-              <Link
-                to="/projets"
-                className="px-8 py-4 bg-gold-gradient text-brand-black text-xs uppercase tracking-widest font-semibold transition-transform hover:scale-[1.03]"
-              >
-                Voir les projets
-              </Link>
-              <Link
-                to="/contact"
-                className="px-8 py-4 border border-brand-accent/50 text-xs uppercase tracking-widest font-medium hover:bg-brand-accent hover:text-brand-black transition-all"
-              >
-                Démarrer un projet
-              </Link>
-            </div>
-
-            <div className="mt-20 flex flex-col items-center gap-2 animate-reveal [animation-delay:700ms]">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-brand-white/40">Scroll</span>
-              <span className="w-px h-12 bg-gradient-to-b from-brand-accent to-transparent animate-pulse-gold" />
-            </div>
-          </div>
-        </div>
-
-        <div className="absolute bottom-2 left-0 w-full opacity-[0.08] select-none pointer-events-none z-[2]">
-          <div className="font-display font-black uppercase text-[14vh] leading-none text-gold-gradient">
-            <Marquee text="Signature ✦ Brand ✦ Signature ✦ Brand ✦" />
-          </div>
-        </div>
-      </section>
-
-
-      {/* SERVICES */}
-      <section className="py-32 px-6 bg-brand-white text-brand-black">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end mb-24">
-            <h2 className="lg:col-span-6 font-display text-5xl md:text-7xl font-bold uppercase leading-none tracking-tighter">
-              L'Impact <br />
-              <span className="text-brand-accent">Signature</span>
-            </h2>
-            <p className="lg:col-span-6 text-lg md:text-xl font-light border-l-2 border-brand-accent pl-8 py-2">
-              Notre approche radicale fusionne la stratégie de marque avec une esthétique hors
-              du commun.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-neutral-200">
-            {[
-              { n: "01", t: "Identité", d: "Logos, typographies et systèmes visuels qui définissent des standards." },
-              { n: "02", t: "Digital", d: "Expériences web immersives conçues pour la performance et l'émotion." },
-              { n: "03", t: "Contenu", d: "Production visuelle et storytelling pour une présence sociale dominante." },
-            ].map((s) => (
-              <div
-                key={s.n}
-                className="bg-brand-white p-12 group hover:bg-brand-black transition-colors duration-500 cursor-pointer"
-              >
-                <span className="text-brand-accent font-display text-xl">{s.n}</span>
-                <h3 className="text-3xl font-display font-bold uppercase mt-8 group-hover:text-brand-white transition-colors">
-                  {s.t}
-                </h3>
-                <p className="mt-4 text-neutral-500 group-hover:text-neutral-400 transition-colors">
-                  {s.d}
-                </p>
-                <div className="mt-12 h-1 w-0 bg-brand-accent group-hover:w-full transition-all duration-700" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Marquee strip */}
-      <section className="bg-brand-black border-y border-brand-white/10 py-8">
-        <div className="font-display text-5xl md:text-7xl font-bold uppercase tracking-tighter text-brand-white/30">
-          <Marquee
-            fast
-            text="Branding ✦ Digital ✦ Motion ✦ Strategy ✦ Content ✦ Art Direction ✦"
-          />
-        </div>
-      </section>
-
-      {/* PORTFOLIO PEEK */}
-      <section className="py-32 px-6">
-        <div className="container mx-auto">
-          <div className="flex justify-between items-end mb-16">
-            <h2 className="font-display text-3xl md:text-5xl uppercase font-bold tracking-tighter leading-none">
-              Derniers <br />
-              travaux
-            </h2>
-            <Link
-              to="/projets"
-              className="px-6 md:px-8 py-3 border border-brand-white/20 rounded-full hover:bg-brand-accent hover:border-brand-accent transition-all text-[10px] md:text-xs uppercase tracking-widest"
+      {/* HERO */}
+      <section className="relative h-[min(86svh,820px)] min-h-[520px] w-full overflow-hidden bg-brand-black">
+        {heroSlides.map((s, i) => {
+          const isActive = currentSlide === i;
+          return (
+            <div
+              key={s.image}
+              className={`absolute inset-0 transition-opacity duration-[1200ms] ease-in-out ${
+                isActive ? "opacity-100 z-0" : "opacity-0 z-0 pointer-events-none"
+              }`}
             >
-              Voir tout
-            </Link>
-          </div>
+              <div className="absolute inset-0 overflow-hidden">
+                {isActive && (
+                  <img
+                    key={`${s.image}-${textKey}`}
+                    src={s.image}
+                    alt={s.imageAlt ?? s.tag}
+                    className={`w-full h-full object-cover will-change-transform ${s.imagePosition ?? "object-center"} ${
+                      i % 2 === 0 ? "hero-slide-motion" : "hero-slide-motion-alt"
+                    }`}
+                  />
+                )}
+              </div>
+            </div>
+          );
+        })}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <Link to="/projets" className="space-y-6 group">
-              <div className="overflow-hidden bg-neutral-900">
-                <img
-                  src={workArchitecture}
-                  alt="Neo Architecture — projet Signature Brand"
-                  loading="lazy"
-                  width={1280}
-                  height={960}
-                  className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                />
-              </div>
-              <div className="flex justify-between items-center">
-                <h4 className="text-xl md:text-2xl font-display uppercase font-bold">
-                  Neo Architecture
-                </h4>
-                <span className="text-xs text-neutral-500 uppercase">2024</span>
-              </div>
-            </Link>
+        {/* Animated ambient overlays */}
+        <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
+          <div className="absolute -top-1/4 -right-1/4 w-[70%] h-[70%] rounded-full bg-brand-accent/15 blur-[120px] animate-hero-glow" />
+          <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-brand-black/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/15" />
+          <div className="absolute inset-0 opacity-[0.04] mix-blend-overlay animate-hero-shine bg-gradient-to-r from-transparent via-white to-transparent w-1/2" />
+        </div>
 
-            <Link to="/projets" className="space-y-6 group md:mt-24">
-              <div className="overflow-hidden bg-neutral-900">
-                <img
-                  src={workLiquid}
-                  alt="Cyber Foundry — projet Signature Brand"
-                  loading="lazy"
-                  width={1280}
-                  height={960}
-                  className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                />
+        <div className="absolute inset-0 z-10 flex items-center">
+          <div className="container mx-auto px-6 md:px-12 lg:px-20">
+            <div key={textKey} className="max-w-2xl space-y-5">
+              <span className="anim-tag inline-flex items-center gap-3 font-mono text-[11px] md:text-sm uppercase tracking-[0.3em] text-brand-accent">
+                <span className="w-10 h-px bg-brand-accent" />
+                {slide.tag}
+              </span>
+
+              <h1 className="title-display-hero text-[2.75rem] sm:text-5xl md:text-6xl lg:text-[5rem]">
+                <span className="anim-title block text-brand-white">{slide.title}</span>
+                <span className="anim-title2 block text-gold-gradient title-accent">{slide.titleAccent}</span>
+              </h1>
+
+              <p className="anim-desc text-base md:text-lg text-brand-white/70 leading-relaxed max-w-xl font-light">
+                {slide.description}
+              </p>
+
+              <div className="anim-cta flex flex-wrap gap-4">
+                <Link
+                  to="/projets"
+                  className="group flex items-center gap-2 px-7 py-3.5 bg-brand-accent text-brand-black text-[10px] uppercase tracking-widest font-bold rounded-full hover:bg-brand-white transition-colors duration-300"
+                >
+                  View our work
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link
+                  to="/contact"
+                  className="px-7 py-3.5 border border-brand-white/30 text-[10px] uppercase tracking-widest font-semibold rounded-full hover:bg-brand-white hover:text-brand-black transition-all duration-300"
+                >
+                  Get in touch
+                </Link>
               </div>
-              <div className="flex justify-between items-center">
-                <h4 className="text-xl md:text-2xl font-display uppercase font-bold">
-                  Cyber Foundry
-                </h4>
-                <span className="text-xs text-neutral-500 uppercase">2023</span>
-              </div>
-            </Link>
+            </div>
           </div>
         </div>
+
+        <div className="absolute bottom-8 right-6 md:right-12 lg:right-20 z-20 flex items-center gap-3">
+          <button
+            onClick={prevSlide}
+            className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-brand-white/70 hover:bg-brand-accent hover:text-brand-black hover:border-brand-accent transition-all duration-300"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft size={18} />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-brand-white/70 hover:bg-brand-accent hover:text-brand-black hover:border-brand-accent transition-all duration-300"
+            aria-label="Next slide"
+          >
+            <ChevronRight size={18} />
+          </button>
+        </div>
+
+        <div className="absolute bottom-8 left-6 md:left-12 lg:left-20 z-20 flex items-center gap-4">
+          {heroSlides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goToSlide(i)}
+              className={`relative h-1 rounded-full overflow-hidden transition-all duration-500 ${
+                currentSlide === i ? "w-16 bg-white/20" : "w-3 bg-white/30 hover:bg-white/50"
+              }`}
+              aria-label={`Go to slide ${i + 1}`}
+            >
+              {currentSlide === i && (
+                <span key={textKey} className="absolute inset-0 bg-brand-accent rounded-full anim-progress" />
+              )}
+            </button>
+          ))}
+          <span className="font-mono text-[10px] text-brand-white/50 tracking-widest ml-2">
+            0{currentSlide + 1} / 0{heroSlides.length}
+          </span>
+        </div>
       </section>
+
+      <ApproachSection />
+
+      <ExpertiseSection />
+
+      <EcosystemSection />
+
+      <FeaturedCreationsSection />
     </PageShell>
   );
 }

@@ -12,8 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ProjetsRouteImport } from './routes/projets'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AgenceRouteImport } from './routes/agence'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -30,6 +32,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AgenceRoute = AgenceRouteImport.update({
   id: '/agence',
   path: '/agence',
@@ -40,40 +47,74 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agence': typeof AgenceRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/projets': typeof ProjetsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agence': typeof AgenceRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/projets': typeof ProjetsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/agence': typeof AgenceRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/projets': typeof ProjetsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/agence' | '/contact' | '/projets' | '/sitemap.xml'
+  fullPaths:
+    | '/'
+    | '/agence'
+    | '/blog'
+    | '/contact'
+    | '/projets'
+    | '/sitemap.xml'
+    | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/agence' | '/contact' | '/projets' | '/sitemap.xml'
-  id: '__root__' | '/' | '/agence' | '/contact' | '/projets' | '/sitemap.xml'
+  to:
+    | '/'
+    | '/agence'
+    | '/blog'
+    | '/contact'
+    | '/projets'
+    | '/sitemap.xml'
+    | '/blog/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/agence'
+    | '/blog'
+    | '/contact'
+    | '/projets'
+    | '/sitemap.xml'
+    | '/blog/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgenceRoute: typeof AgenceRoute
+  BlogRoute: typeof BlogRouteWithChildren
   ContactRoute: typeof ContactRoute
   ProjetsRoute: typeof ProjetsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -102,6 +143,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/agence': {
       id: '/agence'
       path: '/agence'
@@ -116,12 +164,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
   }
 }
+
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgenceRoute: AgenceRoute,
+  BlogRoute: BlogRouteWithChildren,
   ContactRoute: ContactRoute,
   ProjetsRoute: ProjetsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
