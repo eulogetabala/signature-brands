@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { webProjects, graphicProjects, type Project } from "@/data/site-content";
+import { useLocale } from "@/lib/i18n";
 
 const featuredCases: Project[] = [
   webProjects[0],
@@ -11,6 +12,7 @@ const featuredCases: Project[] = [
 ];
 
 export function FeaturedCreationsSection() {
+  const { t } = useLocale();
   const [active, setActive] = useState(0);
   const [fadeKey, setFadeKey] = useState(0);
 
@@ -39,25 +41,19 @@ export function FeaturedCreationsSection() {
           <div>
             <div className="flex items-center gap-4 mb-6">
               <span className="font-mono text-[10px] uppercase tracking-[0.45em] text-brand-accent-deep">
-                (05) Selected cases
+                (05) {t("featured.title")}
               </span>
               <span className="h-px flex-1 max-w-[80px] bg-brand-accent-deep/30" />
             </div>
             <h2 className="title-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[1.02]">
-              Featured{" "}
-              <span
-                className="text-outline title-accent"
-                style={{ WebkitTextStrokeColor: "var(--brand-accent-deep)" }}
-              >
-                creations
-              </span>
+              {t("featured.title")}
             </h2>
           </div>
           <Link
             to="/projets"
             className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-neutral-300 text-brand-black/70 hover:border-brand-accent hover:bg-brand-accent hover:text-brand-black text-[10px] uppercase tracking-widest font-semibold transition-all duration-300 shrink-0 self-start lg:self-auto"
           >
-            View all projects
+            {t("featured.viewAll")}
             <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
         </div>
@@ -97,7 +93,7 @@ export function FeaturedCreationsSection() {
               <div>
                 <div className="flex items-center justify-between gap-4 mb-6">
                   <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-brand-accent px-3 py-1 rounded-full border border-brand-accent/25">
-                    {project.category}
+                    {project.category === "Web Projects" ? t("projects.webProjects") : t("projects.graphicIdentity")}
                   </span>
                   <span className="font-mono text-[10px] text-brand-white/35 tracking-widest">
                     Case {String(active + 1).padStart(2, "0")} / 04
@@ -134,7 +130,7 @@ export function FeaturedCreationsSection() {
                   to="/projets"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-brand-accent text-brand-black text-[10px] uppercase tracking-widest font-bold rounded-full hover:bg-brand-white transition-colors"
                 >
-                  View case study
+                  {t("featured.caseStudy")}
                   <ArrowUpRight size={14} />
                 </Link>
                 {project.website && (
@@ -144,7 +140,7 @@ export function FeaturedCreationsSection() {
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 border border-brand-white/20 text-[10px] uppercase tracking-widest font-semibold rounded-full hover:border-brand-accent hover:text-brand-accent transition-colors"
                   >
-                    Live site
+                    {t("featured.liveSite")}
                     <ExternalLink size={12} />
                   </a>
                 )}
@@ -156,7 +152,7 @@ export function FeaturedCreationsSection() {
         {/* Other cases — filmstrip */}
         <div className="mt-8 md:mt-10">
           <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-neutral-400 mb-4">
-            More selected work
+            {t("featured.moreWork")}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
             {others.map((p) => {

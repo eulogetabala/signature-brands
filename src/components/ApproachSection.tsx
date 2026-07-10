@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { approachPillars, photoBgPosition } from "@/data/site-content";
+import { useLocale } from "@/lib/i18n";
 import { Shield, Target, Compass, Award } from "lucide-react";
 
 const pillarIcons = [Shield, Target, Compass, Award];
@@ -13,6 +14,7 @@ const accentTints = [
 
 export function ApproachSection() {
   const [active, setActive] = useState(0);
+  const { t } = useLocale();
 
   const activate = useCallback((idx: number) => setActive(idx), []);
 
@@ -40,14 +42,13 @@ export function ApproachSection() {
           <div className="lg:col-span-7 flex flex-col justify-end">
             <div className="flex items-center gap-4 mb-6">
               <span className="font-mono text-[10px] uppercase tracking-[0.45em] text-brand-accent">
-                (02) Methodology
+                (02) {t("agency.methodology")}
               </span>
               <span className="h-px flex-1 max-w-[120px] bg-brand-accent/40" />
-              <span className="font-mono text-[10px] text-brand-white/30 tracking-widest">04 steps</span>
+              <span className="font-mono text-[10px] text-brand-white/30 tracking-widest">04 {t("approach.step") === "Step" ? "steps" : "étapes"}</span>
             </div>
             <h2 className="title-display text-[clamp(2.5rem,7vw,5rem)] leading-[1.02]">
-              <span className="block text-brand-white/90">Our bespoke</span>
-              <span className="block text-gold-gradient title-accent mt-1">approach</span>
+              <span className="block text-brand-white/90">{t("approach.title")}</span>
             </h2>
           </div>
 
@@ -55,10 +56,10 @@ export function ApproachSection() {
             <div className="relative p-8 md:p-10 rounded-2xl border border-brand-white/[0.08] bg-brand-white/[0.03] backdrop-blur-sm overflow-hidden group">
               <div className="absolute top-0 left-0 w-full h-[2px] bg-gold-gradient scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left" />
               <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-brand-accent mb-4">
-                Strategic objective
+                {t("approach.objective")}
               </p>
               <p className="text-sm md:text-base text-brand-white/65 font-light leading-relaxed">
-                Build strong, coherent, and credible brands capable of standing out and commanding premium margins in highly competitive markets.
+                {t("approach.process")}
               </p>
               <div className="mt-6 flex items-center gap-3">
                 <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse-gold" />
@@ -127,7 +128,7 @@ export function ApproachSection() {
                 >
                   <div className="flex justify-between items-start">
                     <span className="font-mono text-xs text-brand-accent font-bold tracking-[0.3em]">
-                      Step {p.n}
+                      {t("approach.step")} {p.n}
                     </span>
                     <div className="p-3 rounded-xl bg-brand-accent text-brand-black shadow-lg shadow-brand-accent/20">
                       <Icon size={20} strokeWidth={2.5} />
@@ -142,7 +143,7 @@ export function ApproachSection() {
                     <div className="flex items-center gap-2 pt-2">
                       <span className="h-px w-8 bg-brand-accent" />
                       <span className="font-mono text-[9px] uppercase tracking-widest text-brand-accent/80">
-                        Explore pillar
+                        {t("approach.explore")}
                       </span>
                     </div>
                   </div>
@@ -199,7 +200,7 @@ export function ApproachSection() {
                         </h3>
                         {!isActive && (
                           <p className="text-[10px] font-mono uppercase tracking-widest text-brand-white/40 mt-1">
-                            Tap to expand
+                            {t("approach.tap")}
                           </p>
                         )}
                       </div>

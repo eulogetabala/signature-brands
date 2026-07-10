@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { LetsTalkButton } from "@/components/AppointmentModal";
 import { agencyImages } from "@/data/site-content";
+import { useLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const projectTypes = [
@@ -34,6 +35,7 @@ const socialLinks = [
 ] as const;
 
 export function ContactExperience() {
+  const { t } = useLocale();
   const [sent, setSent] = useState(false);
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -60,17 +62,17 @@ export function ContactExperience() {
             <div className="lg:col-span-7">
               <div className="contact-fade-up flex items-center gap-4 mb-4">
                 <span className="font-mono text-[10px] uppercase tracking-[0.45em] text-brand-accent">
-                  (05) Contact
+                  (05) {t("contact.title")}
                 </span>
                 <span className="h-px flex-1 max-w-[64px] bg-brand-accent/30" />
               </div>
               <h1 className="contact-fade-up contact-delay-1 title-display-hero text-[clamp(2.5rem,8vw,5rem)] leading-[0.96]">
-                Let's{" "}
-                <span className="text-outline title-accent">start</span>
+                {t("contact.title")} {" "}
+                <span className="text-outline title-accent">{t("contact.title")}</span>
                 <span className="text-brand-white">.</span>
               </h1>
               <p className="contact-fade-up contact-delay-2 mt-5 max-w-lg text-sm md:text-base text-brand-white/55 font-light leading-relaxed">
-                Share your brief or book a call — we respond within 24–48 hours with a clear next step.
+                {t("contact.subtitle")}
               </p>
             </div>
 
@@ -96,7 +98,7 @@ export function ContactExperience() {
             <aside className="lg:col-span-4 xl:col-span-4 space-y-3 lg:sticky lg:top-28">
               <ContactCard
                 icon={Mail}
-                label="Email"
+                label={t("contact.email")}
                 href="mailto:hello@signaturebrand.com"
                 value="hello@signaturebrand.com"
               />
@@ -104,21 +106,21 @@ export function ContactExperience() {
               <div className="rounded-2xl border border-brand-white/[0.08] bg-brand-white/[0.03] p-5 hover:border-brand-accent/30 transition-colors">
                 <span className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.2em] text-brand-accent mb-3">
                   <Sparkles size={14} />
-                  Prefer a call?
+                  {t("contact.preferCall")}
                 </span>
                 <p className="text-sm text-brand-white/50 font-light leading-relaxed mb-4">
-                  Pick a date and time — we'll confirm by email.
+                  {t("contact.callCopy")}
                 </p>
                 <LetsTalkButton className="w-full px-5 py-3 bg-brand-accent text-brand-black text-[10px] uppercase tracking-[0.15em] font-bold rounded-full hover:bg-brand-white transition-colors duration-300" />
               </div>
 
-              <ContactCard icon={MapPin} label="Studio" value="Republic of Congo" />
+              <ContactCard icon={MapPin} label={t("contact.studio")} value={t("footer.country")} />
 
-              <ContactCard icon={Clock} label="Response time" value="24–48 business hours" />
+              <ContactCard icon={Clock} label={t("contact.responseTime")} value="24–48 business hours" />
 
               <div className="rounded-2xl border border-brand-white/[0.08] bg-brand-white/[0.03] p-5">
                 <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-brand-white/40 block mb-4">
-                  Follow us
+                  {t("contact.follow")}
                 </span>
                 <div className="flex gap-2">
                   {socialLinks.map(({ href, label, icon: Icon }) => (
@@ -163,11 +165,11 @@ export function ContactExperience() {
                   <div className="flex items-start justify-between gap-4 mb-8">
                     <div>
                       <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-brand-accent block mb-2">
-                        Project brief
+                        {t("contact.projectBrief")}
                       </span>
                       <h2 className="title-display text-2xl md:text-3xl font-medium leading-tight">
-                        Tell us about your{" "}
-                        <span className="title-accent text-gold-gradient">ambition</span>
+                        {t("contact.ambition").split(" ").slice(0, -1).join(" ")} {" "}
+                        <span className="title-accent text-gold-gradient">{t("contact.ambition").split(" ").slice(-1)[0]}</span>
                       </h2>
                     </div>
                     <MessageCircle size={22} className="text-brand-white/15 shrink-0 hidden sm:block" />
@@ -179,47 +181,47 @@ export function ContactExperience() {
                         <Send size={24} strokeWidth={1.5} />
                       </span>
                       <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-brand-accent mb-3">
-                        Message received
+                        {t("contact.messageReceived")}
                       </p>
                       <h3 className="title-display text-3xl md:text-4xl font-medium leading-tight">
-                        Thank you.
+                        {t("contact.thankYou")}
                       </h3>
                       <p className="title-display text-lg title-accent text-brand-white/75 mt-2">
-                        We'll be in touch shortly.
+                        {t("contact.reply")}
                       </p>
                       <p className="mt-4 text-sm text-brand-white/45 font-light max-w-sm mx-auto">
-                        Our team will review your brief and get back to you within 24–48 hours.
+                        {t("contact.reviewBrief")}
                       </p>
                     </div>
                   ) : (
                     <form onSubmit={onSubmit} className="space-y-5">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <FormField label="First name" name="firstName" required autoComplete="given-name" />
-                        <FormField label="Last name" name="lastName" required autoComplete="family-name" />
+                        <FormField label={t("contact.firstName")} name="firstName" required autoComplete="given-name" />
+                        <FormField label={t("contact.lastName")} name="lastName" required autoComplete="family-name" />
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <FormField label="Email" name="email" type="email" required autoComplete="email" />
-                        <FormField label="Company" name="company" autoComplete="organization" />
+                        <FormField label={t("contact.email")} name="email" type="email" required autoComplete="email" />
+                        <FormField label={t("contact.company")} name="company" autoComplete="organization" />
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <SelectField label="Project type" name="projectType" required options={projectTypes} />
-                        <SelectField label="Estimated budget" name="budget" options={budgetRanges} />
+                        <SelectField label={t("contact.projectType")} name="projectType" required options={projectTypes} />
+                        <SelectField label={t("contact.budget")} name="budget" options={budgetRanges} />
                       </div>
 
-                      <TextareaField label="Your project" name="message" required />
+                      <TextareaField label={t("contact.project")} name="message" required />
 
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-2">
                         <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-brand-white/30">
-                          Fields marked * are required
+                          {t("contact.required")}
                         </p>
                         <button
                           type="submit"
                           className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-brand-accent text-brand-black text-[11px] uppercase tracking-[0.15em] font-bold rounded-full hover:bg-brand-white transition-colors duration-300 w-full sm:w-auto"
                         >
                           <Send size={14} strokeWidth={2.5} />
-                          Send brief
+                          {t("contact.sendBrief")}
                         </button>
                       </div>
                     </form>
@@ -349,7 +351,7 @@ function SelectField({
       </span>
       <select name={name} required={required} defaultValue="" className={cn(fieldClass, "cursor-pointer appearance-none")}>
         <option value="" disabled className="bg-brand-black">
-          Select…
+          {t("contact.select")}
         </option>
         {options.map((opt) => (
           <option key={opt} value={opt} className="bg-brand-black">
@@ -380,7 +382,7 @@ function TextareaField({
         name={name}
         required={required}
         rows={5}
-        placeholder="Goals, timeline, audience, references…"
+        placeholder={t("contact.placeholder")}
         className={cn(fieldClass, "resize-none")}
       />
     </label>

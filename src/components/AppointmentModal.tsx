@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useLocale } from "@/lib/i18n";
 
 const timeSlots = [
   "09:00",
@@ -34,6 +35,7 @@ type AppointmentModalProps = {
 
 export function AppointmentModal({ open, onOpenChange }: AppointmentModalProps) {
   const [sent, setSent] = useState(false);
+  const { t } = useLocale();
   const today = new Date().toISOString().split("T")[0];
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -62,10 +64,10 @@ export function AppointmentModal({ open, onOpenChange }: AppointmentModalProps) 
               </span>
               <DialogHeader className="space-y-3">
                 <DialogTitle className="title-display text-2xl sm:text-3xl font-medium text-brand-white">
-                  Request received
+                  {t("contact.requestReceived")}
                 </DialogTitle>
                 <DialogDescription className="text-sm text-brand-white/55 font-light leading-relaxed max-w-xs mx-auto">
-                  Thank you — we'll confirm your appointment by email shortly.
+                  {t("contact.requestCopy")}
                 </DialogDescription>
               </DialogHeader>
               <button
@@ -73,31 +75,31 @@ export function AppointmentModal({ open, onOpenChange }: AppointmentModalProps) 
                 onClick={() => handleOpenChange(false)}
                 className="mt-8 px-8 py-3 bg-brand-accent text-brand-black text-[11px] uppercase tracking-[0.15em] font-bold rounded-full hover:bg-brand-white transition-colors"
               >
-                Close
+                {t("contact.requestClose")}
               </button>
             </div>
           ) : (
             <>
               <DialogHeader className="space-y-3 mb-6 pr-8">
                 <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-brand-accent">
-                  Book a call
+                  {t("contact.bookCall")}
                 </span>
                 <DialogTitle className="title-display text-2xl sm:text-[1.75rem] font-medium text-brand-white leading-tight">
-                  Let's <span className="title-accent text-brand-accent">talk</span>.
+                  {t("contact.bookTitle")}
                 </DialogTitle>
                 <DialogDescription className="text-sm text-brand-white/50 font-light leading-relaxed">
-                  Pick a date and time — we'll get back to you to confirm your appointment.
+                  {t("contact.bookCopy")}
                 </DialogDescription>
               </DialogHeader>
 
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <FormField label="First name" name="firstName" required autoComplete="given-name" />
-                  <FormField label="Last name" name="lastName" required autoComplete="family-name" />
+                  <FormField label={t("contact.firstName")} name="firstName" required autoComplete="given-name" />
+                  <FormField label={t("contact.lastName")} name="lastName" required autoComplete="family-name" />
                 </div>
 
                 <FormField
-                  label="Email"
+                  label={t("contact.email")}
                   name="email"
                   type="email"
                   required
@@ -105,10 +107,10 @@ export function AppointmentModal({ open, onOpenChange }: AppointmentModalProps) 
                 />
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <FormField label="Date" name="date" type="date" required min={today} />
+                  <FormField label={t("contact.date")} name="date" type="date" required min={today} />
                   <label className="block group">
                     <span className="text-[10px] uppercase tracking-[0.25em] text-brand-white/50 group-focus-within:text-brand-accent transition-colors">
-                      Time <span className="text-brand-accent">*</span>
+                      {t("contact.time")} <span className="text-brand-accent">*</span>
                     </span>
                     <select
                       name="time"
@@ -117,7 +119,7 @@ export function AppointmentModal({ open, onOpenChange }: AppointmentModalProps) 
                       className="mt-2 w-full bg-brand-white/[0.04] border border-brand-white/10 focus:border-brand-accent rounded-lg outline-none px-3 py-2.5 text-sm text-brand-white transition-colors appearance-none cursor-pointer"
                     >
                       <option value="" disabled className="bg-brand-black">
-                        Select a time
+                        {t("contact.selectTime")}
                       </option>
                       {timeSlots.map((slot) => (
                         <option key={slot} value={slot} className="bg-brand-black">
@@ -130,13 +132,13 @@ export function AppointmentModal({ open, onOpenChange }: AppointmentModalProps) 
 
                 <label className="block group">
                   <span className="text-[10px] uppercase tracking-[0.25em] text-brand-white/50 group-focus-within:text-brand-accent transition-colors">
-                    Message <span className="text-brand-accent">*</span>
+                    {t("contact.message")} <span className="text-brand-accent">*</span>
                   </span>
                   <textarea
                     name="message"
                     required
                     rows={4}
-                    placeholder="Tell us about your project or what you'd like to discuss..."
+                    placeholder={t("contact.placeholder")}
                     className="mt-2 w-full bg-brand-white/[0.04] border border-brand-white/10 focus:border-brand-accent rounded-lg outline-none px-3 py-2.5 text-sm text-brand-white placeholder:text-brand-white/25 resize-none transition-colors"
                   />
                 </label>
@@ -146,7 +148,7 @@ export function AppointmentModal({ open, onOpenChange }: AppointmentModalProps) 
                   className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-brand-accent text-brand-black text-[11px] uppercase tracking-[0.15em] font-bold rounded-full hover:bg-brand-white transition-colors duration-300"
                 >
                   <Send size={14} strokeWidth={2.5} />
-                  Send request
+                  {t("contact.send")}
                 </button>
               </form>
             </>
@@ -197,6 +199,7 @@ type LetsTalkButtonProps = {
 
 export function LetsTalkButton({ className, children }: LetsTalkButtonProps) {
   const [open, setOpen] = useState(false);
+  const { t } = useLocale();
 
   return (
     <>
@@ -208,7 +211,7 @@ export function LetsTalkButton({ className, children }: LetsTalkButtonProps) {
           "px-5 py-2.5 bg-brand-accent text-brand-black text-[11px] uppercase tracking-[0.15em] font-bold rounded-full hover:bg-brand-white transition-colors duration-300"
         }
       >
-        {children ?? "Let's talk"}
+        {children ?? t("contact.bookCall")}
       </button>
       <AppointmentModal open={open} onOpenChange={setOpen} />
     </>

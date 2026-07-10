@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { services } from "@/data/site-content";
+import { useLocale } from "@/lib/i18n";
 import { Search, Palette, Target, Globe, ArrowUpRight } from "lucide-react";
 
 const serviceIcons = [Search, Palette, Target, Globe];
@@ -13,6 +14,7 @@ const moduleColors = [
 
 export function ExpertiseSection() {
   const [active, setActive] = useState(0);
+  const { t } = useLocale();
 
   const select = useCallback((idx: number) => setActive(idx), []);
 
@@ -40,19 +42,16 @@ export function ExpertiseSection() {
           <div className="lg:col-span-8">
             <div className="flex items-center gap-4 mb-6">
               <span className="font-mono text-[10px] uppercase tracking-[0.45em] text-brand-accent-deep">
-                (03) Framework
+                {t("expertise.frame")}
               </span>
               <span className="h-px flex-1 max-w-[100px] bg-brand-accent-deep/30" />
             </div>
             <h2 className="title-display text-[clamp(2.25rem,6vw,4.75rem)] leading-[1.02]">
-              Expertise &{" "}
-              <span className="text-outline title-accent" style={{ WebkitTextStrokeColor: "var(--brand-accent-deep)" }}>
-                pillars
-              </span>
+              {t("expertise.title")}
             </h2>
           </div>
           <p className="lg:col-span-4 text-sm md:text-base text-neutral-500 font-light leading-relaxed lg:pt-14 lg:border-l lg:border-neutral-200 lg:pl-8">
-            Four interconnected modules that shape how we build impact, positioning, and lasting brand presence.
+            {t("expertise.copy")}
           </p>
         </div>
 
@@ -92,7 +91,7 @@ export function ExpertiseSection() {
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-brand-accent-deep mb-1">
-                      Active module
+                      {t("expertise.activeModule")}
                     </p>
                     <p className="title-display text-2xl md:text-3xl font-medium text-brand-black leading-tight">
                       {services[active].t}
@@ -170,7 +169,7 @@ export function ExpertiseSection() {
                             </h3>
                             {!isActive && (
                               <p className="text-[10px] font-mono uppercase tracking-widest text-brand-white/35 mt-1 hidden sm:block">
-                                Explore module
+                                {t("expertise.exploreModule")}
                               </p>
                             )}
                           </div>
@@ -197,7 +196,7 @@ export function ExpertiseSection() {
                             {serv.d}
                           </p>
                           <span className="inline-flex items-center gap-1.5 mt-4 font-mono text-[9px] uppercase tracking-widest text-brand-accent">
-                            Signature Brand Systems <ArrowUpRight size={10} />
+                            {t("expertise.signatureSystems")} <ArrowUpRight size={10} />
                           </span>
                         </div>
                       </div>

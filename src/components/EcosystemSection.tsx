@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { clients } from "@/data/site-content";
+import { useLocale } from "@/lib/i18n";
 
 export function EcosystemSection() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [fadeKey, setFadeKey] = useState(0);
+  const { t } = useLocale();
 
   const select = useCallback((idx: number) => {
     setActive(idx);
@@ -46,15 +48,13 @@ export function EcosystemSection() {
           <div className="lg:col-span-5 flex flex-col justify-between min-h-[320px] lg:min-h-[480px]">
             <div>
               <span className="font-mono text-[10px] uppercase tracking-[0.45em] text-brand-accent block mb-6">
-                (04) Ecosystem
+                (04) {t("ecosystem.partner")}
               </span>
               <h2 className="title-display text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.08] mb-4">
-                They chose
-                <br />
-                <span className="text-gold-gradient title-accent">Signature.</span>
+                {t("ecosystem.title")}
               </h2>
               <p className="text-sm text-brand-white/45 font-light max-w-sm leading-relaxed">
-                Hover a logo to spotlight a partner — or let the gallery breathe on its own.
+                {t("ecosystem.copy")}
               </p>
             </div>
 
@@ -81,7 +81,7 @@ export function EcosystemSection() {
                     {client.name}
                   </p>
                   <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-brand-accent mt-3">
-                    Partner 0{active + 1} — {String(clients.length).padStart(2, "0")}
+                    {t("ecosystem.partner")} 0{active + 1} — {String(clients.length).padStart(2, "0")}
                   </span>
                 </div>
               </div>
@@ -99,7 +99,7 @@ export function EcosystemSection() {
           {/* Logo constellation — right */}
           <div className="lg:col-span-7 flex flex-col justify-center">
             <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-brand-white/30 mb-6 hidden lg:block">
-              Trusted by leading brands
+              {t("ecosystem.trustedBy")}
             </p>
 
             <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 md:gap-4">

@@ -19,22 +19,9 @@ import {
 } from "lucide-react";
 import logo from "@/assets/logo-signature.jpg";
 import { LetsTalkButton } from "@/components/AppointmentModal";
+import { LanguageToggle } from "@/components/LanguageToggle";
 import { agencyImages } from "@/data/site-content";
-
-const exploreLinks = [
-  { to: "/", label: "Home", icon: Home },
-  { to: "/projets", label: "Projects", icon: FolderOpen },
-  { to: "/agence", label: "Agency", icon: Building2 },
-  { to: "/blog", label: "Blog", icon: BookOpen },
-  { to: "/contact", label: "Contact", icon: MessageCircle },
-] as const;
-
-const expertiseLinks = [
-  { to: "/agence" as const, label: "Our approach", icon: Target },
-  { to: "/projets" as const, label: "Web projects", icon: Monitor },
-  { to: "/projets" as const, label: "Brand identity", icon: Palette },
-  { to: "/" as const, label: "Methodology", icon: Route, hash: "approach" as const },
-];
+import { useLocale } from "@/lib/i18n";
 
 const socialLinks = [
   { href: "#", label: "Instagram", icon: Instagram },
@@ -43,6 +30,8 @@ const socialLinks = [
 ] as const;
 
 function StartProjectCta() {
+  const { t } = useLocale();
+
   return (
     <section
       id="start-project"
@@ -54,13 +43,13 @@ function StartProjectCta() {
       <div className="grid grid-cols-1 lg:grid-cols-12 min-h-0">
         <div className="lg:col-span-7 xl:col-span-6 relative z-10 px-6 md:px-12 lg:px-20 py-16 md:py-20 lg:py-24 flex flex-col justify-center">
           <span className="font-mono text-[10px] uppercase tracking-[0.45em] text-brand-accent block mb-5">
-            (06) Start a project
+            (06) {t("nav.startProject")}
           </span>
           <h2 className="title-display text-[clamp(2.25rem,6vw,3.75rem)] leading-[1.02] max-w-lg">
-            Ready for <span className="title-accent text-gold-gradient">impact?</span>
+            {t("footer.ctaTitle")}
           </h2>
           <p className="mt-5 text-sm md:text-base text-brand-white/50 font-light max-w-md leading-relaxed">
-            Tell us about your brand, your ambitions — we shape communication that stands out.
+            {t("footer.ctaDescription")}
           </p>
 
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl">
@@ -79,7 +68,7 @@ function StartProjectCta() {
               </span>
               <span>
                 <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-brand-accent block mb-1.5">
-                  Email us
+                  {t("footer.emailUs")}
                 </span>
                 <span className="title-display text-base md:text-lg font-medium break-all group-hover:text-brand-accent transition-colors leading-snug">
                   hello@signaturebrand.com
@@ -99,10 +88,10 @@ function StartProjectCta() {
               </span>
               <span>
                 <span className="font-mono text-[9px] uppercase tracking-[0.2em] opacity-65 block mb-1.5">
-                  Brief
+                  {t("footer.brief")}
                 </span>
                 <span className="title-display text-base md:text-lg font-medium leading-snug">
-                  Send your brief
+                  {t("footer.sendBrief")}
                 </span>
               </span>
             </LetsTalkButton>
@@ -131,6 +120,22 @@ function StartProjectCta() {
 export function SiteFooter() {
   const year = new Date().getFullYear();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { t } = useLocale();
+  const exploreLinks = [
+    { to: "/", label: t("nav.home"), icon: Home },
+    { to: "/projets", label: t("nav.projects"), icon: FolderOpen },
+    { to: "/agence", label: t("nav.agency"), icon: Building2 },
+    { to: "/blog", label: t("nav.blog"), icon: BookOpen },
+    { to: "/contact", label: t("nav.contact"), icon: MessageCircle },
+  ] as const;
+
+  const expertiseLinks = [
+    { to: "/agence" as const, label: t("footer.ourApproach"), icon: Target },
+    { to: "/projets" as const, label: t("footer.webProjects"), icon: Monitor },
+    { to: "/projets" as const, label: t("footer.brandIdentity"), icon: Palette },
+    { to: "/" as const, label: t("footer.methodology"), icon: Route, hash: "approach" as const },
+  ];
+
   const hideStartProjectCta =
     pathname === "/projets" ||
     pathname === "/agence" ||
@@ -157,27 +162,32 @@ export function SiteFooter() {
               </span>
               <div>
                 <span className="title-display text-2xl font-medium block">
-                  Signature<span className="title-accent text-brand-accent">.</span>
+                  Signature Brand<span className="title-accent text-brand-accent">.</span>
                 </span>
                 <span className="text-xs text-brand-white/45 font-light mt-1 block">
-                  Creative communication agency
+                  {t("footer.brandDesc")}
                 </span>
               </div>
             </Link>
 
-            <a
-              href="mailto:hello@signaturebrand.com"
-              className="group inline-flex items-center gap-3 px-5 py-3 rounded-full border border-brand-white/10 bg-brand-white/[0.04] hover:border-brand-accent/40 hover:bg-brand-white/[0.06] transition-all"
-            >
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="hidden md:block">
+                <LanguageToggle />
+              </div>
+              <a
+                href="mailto:hello@signaturebrand.com"
+                className="group inline-flex items-center gap-3 px-5 py-3 rounded-full border border-brand-white/10 bg-brand-white/[0.04] hover:border-brand-accent/40 hover:bg-brand-white/[0.06] transition-all"
+              >
               <Mail size={16} className="text-brand-accent" />
               <span className="text-sm font-medium text-brand-white/80 group-hover:text-brand-white transition-colors">
                 hello@signaturebrand.com
               </span>
-              <ArrowUpRight
-                size={14}
-                className="text-brand-white/30 group-hover:text-brand-accent transition-colors"
-              />
-            </a>
+                <ArrowUpRight
+                  size={14}
+                  className="text-brand-white/30 group-hover:text-brand-accent transition-colors"
+                />
+              </a>
+            </div>
           </div>
 
           {/* Links grid */}
@@ -185,7 +195,7 @@ export function SiteFooter() {
             <div>
               <p className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.35em] text-brand-accent mb-6">
                 <Compass size={14} />
-                Explore
+                {t("footer.explore")}
               </p>
               <ul className="space-y-4">
                 {exploreLinks.map((link) => {
@@ -212,7 +222,7 @@ export function SiteFooter() {
             <div>
               <p className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.35em] text-brand-accent mb-6">
                 <Target size={14} />
-                Expertise
+                {t("footer.expertise")}
               </p>
               <ul className="space-y-4">
                 {expertiseLinks.map((link) => {
@@ -236,10 +246,10 @@ export function SiteFooter() {
             <div>
               <p className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.35em] text-brand-accent mb-6">
                 <MessageCircle size={14} />
-                Connect
+                {t("footer.connect")}
               </p>
               <p className="text-sm text-brand-white/45 font-light leading-relaxed mb-6">
-                Follow our work and reach out to start your next communication project.
+                {t("footer.connectText")}
               </p>
               <div className="flex gap-3">
                 {socialLinks.map((s) => {
@@ -270,13 +280,13 @@ export function SiteFooter() {
             <p>© {year} Signature Brand</p>
             <div className="flex flex-wrap justify-center gap-6">
               <a href="#" className="hover:text-brand-accent transition-colors">
-                Privacy
+                {t("footer.privacy")}
               </a>
               <a href="#" className="hover:text-brand-accent transition-colors">
-                Legal
+                {t("footer.legal")}
               </a>
               <span className="text-brand-white/15">·</span>
-              <span>Republic of Congo</span>
+              <span>{t("footer.country")}</span>
             </div>
           </div>
         </div>

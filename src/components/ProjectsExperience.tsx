@@ -30,21 +30,10 @@ import {
   type Project,
   type ProjectCategory,
 } from "@/data/site-content";
+import { useLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 type Tab = "All" | ProjectCategory;
-
-const tabs: { id: Tab; label: string; short: string; icon: typeof Globe; count: number }[] = [
-  { id: "All", label: "All Works", short: "All", icon: Layers, count: allProjects.length },
-  { id: "Web Projects", label: "Web Projects", short: "Web", icon: Globe, count: webProjects.length },
-  {
-    id: "Graphic Identity Projects",
-    label: "Graphic Identity",
-    short: "Identity",
-    icon: Palette,
-    count: graphicProjects.length,
-  },
-];
 
 const webBento = ["lg:col-span-8", "lg:col-span-4", "lg:col-span-4", "lg:col-span-4", "lg:col-span-8", "lg:col-span-4"];
 const graphicBento = [
@@ -57,14 +46,25 @@ const graphicBento = [
   "lg:col-span-7",
 ];
 
-const capabilityPills: Record<Tab, string[]> = {
-  All: ["Brand Strategy", "Web Platforms", "Visual Identity", "Campaign Design", "E-Commerce"],
-  "Web Projects": ["UX Strategy", "Front-end", "E-Commerce", "Institutional", "Performance"],
-  "Graphic Identity Projects": ["Logo Systems", "Print", "Social Kits", "Campaigns", "Packaging"],
-};
-
 export function ProjectsExperience() {
+  const { t } = useLocale();
   const [activeTab, setActiveTab] = useState<Tab>("All");
+  const tabs: { id: Tab; label: string; short: string; icon: typeof Globe; count: number }[] = [
+    { id: "All", label: t("projects.allWorks"), short: t("projects.allWorks"), icon: Layers, count: allProjects.length },
+    { id: "Web Projects", label: t("projects.webProjects"), short: t("projects.web"), icon: Globe, count: webProjects.length },
+    {
+      id: "Graphic Identity Projects",
+      label: t("projects.graphicIdentity"),
+      short: t("projects.graphic"),
+      icon: Palette,
+      count: graphicProjects.length,
+    },
+  ];
+  const capabilityPills: Record<Tab, string[]> = {
+    All: [t("projects.allWorks"), t("projects.webProjects"), t("projects.graphicIdentity"), t("projects.ourProcess"), t("projects.spotlight")],
+    "Web Projects": ["UX Strategy", "Front-end", "E-Commerce", "Institutional", "Performance"],
+    "Graphic Identity Projects": ["Logo Systems", "Print", "Social Kits", "Campaigns", "Packaging"],
+  };
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [spotlightIndex, setSpotlightIndex] = useState(0);
 
@@ -127,17 +127,15 @@ export function ProjectsExperience() {
             <div className="lg:col-span-7 xl:col-span-8">
               <div className="projects-fade-up flex items-center gap-4 mb-5">
                 <span className="font-mono text-[10px] uppercase tracking-[0.45em] text-brand-accent">
-                  (01) Portfolio
+                  {t("projects.portfolio")}
                 </span>
                 <span className="h-px flex-1 max-w-[72px] bg-brand-accent/30" />
               </div>
               <h1 className="projects-fade-up projects-delay-1 title-display-hero text-[clamp(2.75rem,10vw,6.5rem)] leading-[0.95]">
-                Selected{" "}
-                <span className="text-outline title-accent">works</span>
+                {t("projects.heroTitle")}
               </h1>
               <p className="projects-fade-up projects-delay-2 mt-6 max-w-lg text-sm md:text-base text-brand-white/55 font-light leading-relaxed">
-                Web platforms and graphic identities crafted for brands that demand clarity, distinction,
-                and measurable impact across African markets and beyond.
+                {t("projects.heroCopy")}
               </p>
 
               <div className="projects-fade-up projects-delay-3 mt-6 flex flex-wrap gap-2">
@@ -154,9 +152,9 @@ export function ProjectsExperience() {
 
             <div className="lg:col-span-5 xl:col-span-4 projects-fade-up projects-delay-3">
               <div className="grid grid-cols-3 gap-2 md:gap-3">
-                <StatCard value={String(allProjects.length).padStart(2, "0")} label="Projects" accent />
-                <StatCard value={String(webProjects.length).padStart(2, "0")} label="Web" />
-                <StatCard value={String(graphicProjects.length).padStart(2, "0")} label="Identity" />
+                <StatCard value={String(allProjects.length).padStart(2, "0")} label={t("projects.allWorks")} accent />
+                <StatCard value={String(webProjects.length).padStart(2, "0")} label={t("projects.web")} />
+                <StatCard value={String(graphicProjects.length).padStart(2, "0")} label={t("projects.graphic")} />
               </div>
               <Link
                 to="/agence"
@@ -168,9 +166,9 @@ export function ProjectsExperience() {
                   </span>
                   <span className="text-left min-w-0">
                     <span className="block text-[10px] font-mono uppercase tracking-[0.2em] text-brand-white/40">
-                      Our process
+                      {t("projects.ourProcess")}
                     </span>
-                    <span className="block text-sm text-brand-white/75 truncate">Discover the studio</span>
+                    <span className="block text-sm text-brand-white/75 truncate">{t("projects.discoverStudio")}</span>
                   </span>
                 </span>
                 <ArrowUpRight
@@ -210,7 +208,7 @@ export function ProjectsExperience() {
                     {String(spotlightIndex + 1).padStart(2, "0")}
                   </span>
                   <span className="font-mono text-[10px] uppercase tracking-widest text-brand-white/70 px-3 py-1.5 rounded-full bg-brand-black/55 backdrop-blur border border-brand-white/10">
-                    Featured · {spotlight.year}
+                    {t("projects.spotlight")} · {spotlight.year}
                   </span>
                 </div>
                 <ArrowUpRight
@@ -230,7 +228,7 @@ export function ProjectsExperience() {
                       ) : (
                         <Palette size={11} />
                       )}
-                      Spotlight
+                      {t("projects.spotlight")}
                     </span>
                     <span className="font-mono text-[10px] text-brand-white/35 tracking-widest">
                       {String(spotlightIndex + 1).padStart(2, "0")} / {String(spotlightPool.length).padStart(2, "0")}
@@ -267,13 +265,13 @@ export function ProjectsExperience() {
                     onClick={() => setSelectedProject(spotlight)}
                     className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] font-semibold text-brand-accent hover:text-brand-white transition-colors"
                   >
-                    Open case study
+                    {t("projects.openCaseStudy")}
                     <ArrowUpRight size={14} />
                   </button>
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
-                      aria-label="Previous spotlight"
+                      aria-label={t("projects.previous")}
                       onClick={() => setSpotlightIndex((i) => (i - 1 + spotlightPool.length) % spotlightPool.length)}
                       className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-white/10 text-brand-white/50 hover:border-brand-accent/40 hover:text-brand-accent transition-colors"
                     >
@@ -281,7 +279,7 @@ export function ProjectsExperience() {
                     </button>
                     <button
                       type="button"
-                      aria-label="Next spotlight"
+                      aria-label={t("projects.next")}
                       onClick={() => setSpotlightIndex((i) => (i + 1) % spotlightPool.length)}
                       className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-white/10 text-brand-white/50 hover:border-brand-accent/40 hover:text-brand-accent transition-colors"
                     >
@@ -328,7 +326,7 @@ export function ProjectsExperience() {
               );
             })}
             <span className="ml-auto mr-3 font-mono text-[10px] text-brand-white/30 tracking-widest hidden md:block">
-              {filteredProjects.length} displayed
+              {filteredProjects.length} {t("projects.displayed")}
             </span>
           </div>
         </div>
@@ -339,8 +337,8 @@ export function ProjectsExperience() {
         {(activeTab === "All" || activeTab === "Web Projects") && (
           <CategorySection
             index="01"
-            title="Web Projects"
-            subtitle="Digital platforms, e-commerce & institutional experiences"
+            title={t("projects.webSectionTitle")}
+            subtitle={t("projects.webSectionCopy")}
             headerImg="/images/web_projects_header.png"
             projects={activeTab === "All" ? webProjects : filteredProjects}
             bento={webBento}
@@ -351,8 +349,8 @@ export function ProjectsExperience() {
         {(activeTab === "All" || activeTab === "Graphic Identity Projects") && (
           <CategorySection
             index="02"
-            title="Graphic Identity"
-            subtitle="Branding systems, campaigns & visual storytelling"
+            title={t("projects.graphicSectionTitle")}
+            subtitle={t("projects.graphicSectionCopy")}
             headerImg="/images/graphic_projects_header.png"
             projects={activeTab === "All" ? graphicProjects : filteredProjects}
             bento={graphicBento}
@@ -406,7 +404,7 @@ export function ProjectsExperience() {
                       ) : (
                         <Palette size={11} />
                       )}
-                      {selectedProject.category}
+                      {selectedProject.category === "Web Projects" ? t("projects.webProjects") : t("projects.graphicIdentity")}
                     </span>
                     <span className="font-mono text-[10px] text-brand-white/40 tracking-widest">
                       {String(selectedIndex + 1).padStart(2, "0")} / {String(filteredProjects.length).padStart(2, "0")}
@@ -427,7 +425,7 @@ export function ProjectsExperience() {
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
                   <div className="md:col-span-7 space-y-5">
                     <h4 className="font-mono text-[10px] uppercase tracking-[0.3em] text-brand-accent">
-                      Project Overview
+                      {t("projects.projectOverview")}
                     </h4>
                     <p className="text-brand-white/65 font-light leading-relaxed text-sm md:text-base">
                       {selectedProject.description}
@@ -453,7 +451,7 @@ export function ProjectsExperience() {
                         rel="noreferrer"
                         className="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-semibold px-6 py-3 border border-brand-accent/40 text-brand-accent hover:bg-brand-accent hover:text-brand-black transition-all rounded-full"
                       >
-                        Visit Website <ExternalLink size={14} />
+                        {t("featured.liveSite")} <ExternalLink size={14} />
                       </a>
                     )}
                   </div>
@@ -462,7 +460,7 @@ export function ProjectsExperience() {
                     {selectedProject.highlights && (
                       <div className="space-y-4">
                         <h4 className="font-mono text-[10px] uppercase tracking-[0.3em] text-brand-accent flex items-center gap-2">
-                          <Layers size={14} /> Key Highlights
+                          <Layers size={14} /> {t("projects.keyHighlights")}
                         </h4>
                         <ul className="space-y-3">
                           {selectedProject.highlights.map((hl) => (
@@ -483,7 +481,7 @@ export function ProjectsExperience() {
                 {selectedProject.gallery && selectedProject.gallery.length > 1 && (
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-brand-accent mb-4">
-                      Gallery
+                      {t("projects.gallery")}
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {selectedProject.gallery.map((src) => (
@@ -499,7 +497,7 @@ export function ProjectsExperience() {
                 )}
 
                 <p className="font-mono text-[9px] text-brand-white/25 uppercase tracking-widest text-center pt-2">
-                  Use ← → to navigate between projects
+                  {t("projects.navigationHint")}
                 </p>
               </div>
             </div>
@@ -513,14 +511,13 @@ export function ProjectsExperience() {
         <div className="grid grid-cols-1 lg:grid-cols-12 min-h-0">
           <div className="lg:col-span-6 xl:col-span-5 px-6 md:px-12 lg:px-16 py-16 md:py-20 flex flex-col justify-center relative z-10">
             <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-brand-accent block mb-5">
-              Start a project
+              {t("projects.startProject")}
             </span>
             <h2 className="title-display text-[clamp(2rem,5vw,3.25rem)] font-medium leading-[1.05] max-w-md">
-              Let's build your{" "}
-              <span className="title-accent text-gold-gradient">signature</span>
+              {t("projects.ctaTitle")}
             </h2>
             <p className="mt-4 text-sm md:text-base text-brand-white/50 font-light leading-relaxed max-w-md">
-              Ready to stand out? Share your vision — we craft communication that leaves a lasting mark.
+              {t("projects.ctaCopy")}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <LetsTalkButton className="px-7 py-3.5 bg-brand-accent text-brand-black text-[11px] uppercase tracking-[0.15em] font-bold rounded-full hover:bg-brand-white transition-colors duration-300" />
@@ -528,7 +525,7 @@ export function ProjectsExperience() {
                 to="/contact"
                 className="inline-flex items-center gap-2 px-7 py-3.5 border border-brand-white/15 rounded-full text-[11px] uppercase tracking-[0.15em] font-semibold text-brand-white/65 hover:border-brand-accent hover:text-brand-accent transition-all"
               >
-                Contact us
+                {t("projects.contactUs")}
                 <ArrowUpRight size={14} />
               </Link>
             </div>
@@ -546,7 +543,7 @@ export function ProjectsExperience() {
                 Signature Brand
               </span>
               <span className="title-display text-xl md:text-2xl text-brand-white/90">
-                Craft with purpose.
+                {t("projects.signatureTagline")}
               </span>
             </div>
           </div>
@@ -639,7 +636,7 @@ function CategorySection({
           <div className="lg:col-span-4 flex items-center gap-4 lg:justify-end">
             <span className="h-px flex-1 bg-brand-white/10 hidden lg:block" />
             <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-brand-accent shrink-0">
-              {projects.length} works
+              {projects.length} {t("projects.allWorks")}
             </span>
           </div>
         </div>
@@ -721,7 +718,7 @@ function ProjectCard({
         <div className="absolute inset-x-0 bottom-0 p-4 md:p-5 z-10">
           <span className="inline-flex items-center gap-1.5 text-[8px] font-mono uppercase tracking-[0.18em] text-brand-accent px-2 py-0.5 bg-brand-accent/10 border border-brand-accent/20 rounded-full mb-2.5">
             {isWeb ? <Globe size={9} /> : <Palette size={9} />}
-            {isWeb ? "Web" : "Identity"}
+            {isWeb ? t("projects.web") : t("projects.graphic")}
           </span>
           <h3 className="title-display text-lg md:text-xl lg:text-2xl font-medium text-brand-white group-hover:text-brand-accent transition-colors duration-300 leading-tight">
             {p.title}

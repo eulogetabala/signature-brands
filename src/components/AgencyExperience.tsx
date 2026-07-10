@@ -5,6 +5,7 @@ import { Link } from "@tanstack/react-router";
 import { LetsTalkButton } from "@/components/AppointmentModal";
 import { TrustedPartnersSection } from "@/components/TrustedPartnersSection";
 import { services, approachPillars, agencyImages } from "@/data/site-content";
+import { useLocale } from "@/lib/i18n";
 import { ArrowUpRight } from "lucide-react";
 
 const bentoLayout = [
@@ -14,9 +15,14 @@ const bentoLayout = [
   "md:col-span-5",
 ] as const;
 
-const heroPills = ["Brand Strategy", "Visual Identity", "Digital Craft", "Premium Positioning"] as const;
-
 export function AgencyExperience() {
+  const { t } = useLocale();
+  const heroPills = [
+    t("agency.heroPillStrategy"),
+    t("agency.heroPillIdentity"),
+    t("agency.heroPillDigital"),
+    t("agency.heroPillPositioning"),
+  ];
   const [activeStep, setActiveStep] = useState(0);
   const step = approachPillars[activeStep];
   const stepPhoto = agencyImages.approach[activeStep];
@@ -24,7 +30,7 @@ export function AgencyExperience() {
 
   return (
     <div className="agency-page">
-      {/* ── HERO · The Atelier ── */}
+      {/* ── HERO · The Studio ── */}
       <section className="relative overflow-hidden px-6">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_15%_50%,oklch(0.72_0.11_75/0.14),transparent_65%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_45%_35%_at_85%_20%,oklch(0.55_0.10_65/0.06),transparent_55%)]" />
@@ -44,19 +50,18 @@ export function AgencyExperience() {
             <div className="lg:col-span-6 xl:col-span-5 space-y-4 md:space-y-5">
               <div className="agency-fade-up flex items-center gap-4">
                 <span className="font-mono text-[10px] uppercase tracking-[0.45em] text-brand-accent">
-                  (02) The Atelier
+                  (02) {t("agency.title")}
                 </span>
                 <span className="h-px flex-1 max-w-[64px] bg-brand-accent/35" />
               </div>
 
               <h1 className="agency-fade-up agency-delay-1 title-display-hero text-[clamp(2.25rem,6vw,4.25rem)] leading-[1.04]">
-                <span className="block text-brand-white">Creative studio</span>
-                <span className="block text-gold-gradient title-accent mt-1">for bold brands.</span>
+                <span className="block text-brand-white">{t("agency.title")}</span>
+                <span className="block text-gold-gradient title-accent mt-1">{t("agency.subtitle")}</span>
               </h1>
 
               <p className="agency-fade-up agency-delay-2 text-sm md:text-base text-brand-white/55 font-light leading-relaxed max-w-md">
-                We merge strategy, design, and digital craft to build identities that feel inevitable —
-                distinctive, coherent, and built to last.
+                {t("agency.description")}
               </p>
 
               <div className="agency-fade-up agency-delay-3 flex flex-wrap gap-2">
@@ -76,16 +81,16 @@ export function AgencyExperience() {
                   to="/projets"
                   className="group inline-flex items-center gap-2 px-7 py-3.5 border border-brand-white/20 rounded-full text-[10px] uppercase tracking-[0.18em] font-semibold text-brand-white/70 hover:border-brand-accent hover:text-brand-accent transition-all duration-300"
                 >
-                  Our work
+                  {t("agency.ourWork")}
                   <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Link>
               </div>
 
               <div className="agency-fade-up agency-delay-5 flex flex-wrap gap-6 md:gap-8 pt-3 border-t border-brand-white/[0.08]">
                 {[
-                  { v: "15+", l: "Partners" },
-                  { v: "13", l: "Projects" },
-                  { v: "2024", l: "Founded" },
+                  { v: "15+", l: t("agency.partners") },
+                  { v: "13", l: t("agency.projects") },
+                  { v: "2024", l: t("agency.founded") },
                 ].map((s) => (
                   <div key={s.l}>
                     <span className="title-display text-xl md:text-2xl text-brand-accent block leading-none">{s.v}</span>
@@ -115,7 +120,7 @@ export function AgencyExperience() {
                   <div className="absolute top-4 left-4 md:top-5 md:left-5">
                     <span className="inline-flex items-center gap-2 font-mono text-[8px] uppercase tracking-[0.2em] text-brand-white/80 px-2.5 py-1 rounded-full bg-brand-black/45 backdrop-blur-md border border-brand-white/10">
                       <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse-gold" />
-                      Live from the studio
+                      {t("agency.liveStudio")}
                     </span>
                   </div>
 
@@ -124,7 +129,7 @@ export function AgencyExperience() {
                       Signature Brand
                     </p>
                     <p className="title-display text-lg md:text-xl font-medium text-brand-white leading-snug max-w-sm">
-                      Strategy, identity & digital — crafted as one.
+                      {t("agency.signatureLine")}
                     </p>
                   </div>
                 </div>
@@ -132,10 +137,10 @@ export function AgencyExperience() {
                 {/* Floating accent card */}
                 <div className="absolute -bottom-3 -left-2 md:-bottom-4 md:-left-4 z-10 rounded-xl border border-brand-white/10 bg-brand-black/75 backdrop-blur-xl px-4 py-3 shadow-xl max-w-[180px] agency-hero-card hidden sm:block">
                   <span className="font-mono text-[8px] uppercase tracking-widest text-brand-accent block mb-0.5">
-                    Focus
+                    {t("agency.focus")}
                   </span>
                   <span className="title-display text-sm font-medium text-brand-white leading-tight">
-                    Premium brand experiences
+                    {t("agency.premiumExperiences")}
                   </span>
                 </div>
               </div>
@@ -150,18 +155,18 @@ export function AgencyExperience() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16">
             <div>
               <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-brand-accent-deep block mb-4">
-                What we do
+                {t("agency.whatWeDo")}
               </span>
               <h2 className="title-display text-[clamp(2rem,5vw,3.5rem)] leading-tight">
-                Four disciplines,
+                {t("agency.fourDisciplines")}
                 <br />
                 <span className="title-accent text-outline" style={{ WebkitTextStrokeColor: "var(--brand-accent-deep)" }}>
-                  one signature.
+                  {t("agency.oneSignature")}
                 </span>
               </h2>
             </div>
             <p className="text-sm text-neutral-500 font-light max-w-xs md:text-right leading-relaxed">
-              Hover each module to reveal the craft behind our work.
+              {t("agency.hover")}
             </p>
           </div>
 
@@ -207,12 +212,12 @@ export function AgencyExperience() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             <div className="lg:col-span-4 lg:sticky lg:top-28">
               <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-brand-accent block mb-5">
-                Methodology
+                {t("agency.methodology")}
               </span>
               <h2 className="title-display text-[clamp(2rem,4vw,3rem)] font-medium leading-tight mb-6">
-                How we
+                {t("agency.methodologyTitle")}
                 <br />
-                <span className="title-accent text-gold-gradient">sculpt brands</span>
+                <span className="title-accent text-gold-gradient">{t("agency.methodologyTitleAccent")}</span>
               </h2>
               <div className="flex flex-col gap-2">
                 {approachPillars.map((s, i) => (
@@ -255,7 +260,7 @@ export function AgencyExperience() {
                       {step.n}
                     </span>
                     <span className="relative font-mono text-[10px] uppercase tracking-widest text-brand-accent px-3 py-1 rounded-full border border-brand-accent/30 bg-brand-black/50 backdrop-blur">
-                      Step {step.n}
+                      {t("agency.step")} {step.n}
                     </span>
                     <h3 className="relative title-display text-3xl md:text-4xl font-medium text-brand-white mt-4">{step.t}</h3>
                   </div>
@@ -275,14 +280,14 @@ export function AgencyExperience() {
           <div className="relative bg-brand-black flex items-center justify-center p-10 md:p-16 lg:clip-path-none agency-cta-left">
             <div className="relative z-10 max-w-md text-center lg:text-left">
               <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-brand-accent block mb-6">
-                Start a project
+                {t("agency.startProject")}
               </span>
               <h2 className="title-display text-[clamp(2rem,5vw,3.25rem)] font-medium leading-tight text-brand-white">
-                Your next chapter starts with a{" "}
-                <span className="title-accent text-gold-gradient">conversation</span>.
+                {t("agency.conversation").split(" ").slice(0, -1).join(" ")} {" "}
+                <span className="title-accent text-gold-gradient">{t("agency.conversation").split(" ").slice(-1)[0]}</span>.
               </h2>
               <p className="mt-5 text-sm text-brand-white/45 font-light leading-relaxed">
-                Tell us your ambition — we'll craft the identity and communication to match.
+                {t("agency.ctaCopy")}
               </p>
               <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
                 <LetsTalkButton className="px-8 py-4 bg-brand-accent text-brand-black text-[11px] uppercase tracking-[0.15em] font-bold rounded-full hover:bg-brand-white transition-colors duration-300" />
@@ -290,7 +295,7 @@ export function AgencyExperience() {
                   to="/projets"
                   className="group inline-flex items-center gap-2 px-8 py-4 border border-brand-white/20 text-[11px] uppercase tracking-[0.15em] font-semibold rounded-full text-brand-white hover:border-brand-accent hover:text-brand-accent transition-all duration-300"
                 >
-                  Portfolio
+                  {t("agency.portfolio")}
                   <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Link>
               </div>

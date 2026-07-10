@@ -11,10 +11,10 @@ import { heroSlides } from "@/data/site-content";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Signature Brand — Creative Communication Agency" },
-      { name: "description", content: "The agency for brands that refuse the ordinary. Identity, digital, and content." },
-      { property: "og:title", content: "Signature Brand — Creative Communication Agency" },
-      { property: "og:description", content: "The agency for brands that refuse the ordinary." },
+      { title: "Signature Brand — Strategic Premium Brand Image Consultancy" },
+      { name: "description", content: "The consultancy for brands that refuse the ordinary. Identity, digital, and premium brand strategy." },
+      { property: "og:title", content: "Signature Brand — Strategic Premium Brand Image Consultancy" },
+      { property: "og:description", content: "The consultancy for brands that refuse the ordinary." },
     ],
   }),
   component: Home,

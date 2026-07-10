@@ -10,11 +10,13 @@ import {
   type BlogCategory,
   type BlogPost,
 } from "@/data/blog-content";
+import { useLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 type Filter = "All" | BlogCategory;
 
 export function BlogExperience() {
+  const { locale, t } = useLocale();
   const [filter, setFilter] = useState<Filter>("All");
   const featured = blogPosts.find((p) => p.featured) ?? blogPosts[0];
 
@@ -41,16 +43,15 @@ export function BlogExperience() {
         <div className="container mx-auto relative z-10">
           <div className="blog-fade-up flex items-center gap-4 mb-4">
             <span className="font-mono text-[10px] uppercase tracking-[0.45em] text-brand-accent">
-              (04) Journal
+              {t("blog.journal")}
             </span>
             <span className="h-px flex-1 max-w-[64px] bg-brand-accent/30" />
           </div>
           <h1 className="blog-fade-up blog-delay-1 title-display-hero text-[clamp(2.5rem,8vw,5rem)] leading-[0.96] max-w-3xl">
-            Insights &{" "}
-            <span className="text-outline title-accent">perspectives</span>
+            {t("blog.title")}
           </h1>
           <p className="blog-fade-up blog-delay-2 mt-5 max-w-xl text-sm md:text-base text-brand-white/55 font-light leading-relaxed">
-            Strategy, design, and digital craft — notes from the studio on building brands that last.
+            {t("blog.copy")}
           </p>
         </div>
       </section>
@@ -58,13 +59,13 @@ export function BlogExperience() {
       <section className="sticky top-[68px] md:top-[76px] z-40 px-6 pb-5">
         <div className="container mx-auto">
           <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-2xl bg-brand-black/85 backdrop-blur-2xl border border-brand-white/[0.08]">
-            <FilterButton active={filter === "All"} onClick={() => setFilter("All")} label="All" count={blogPosts.length} />
+            <FilterButton active={filter === "All"} onClick={() => setFilter("All")} label={t("blog.all")} count={blogPosts.length} />
             {blogCategories.map((cat) => (
               <FilterButton
                 key={cat}
                 active={filter === cat}
                 onClick={() => setFilter(cat)}
-                label={cat}
+                label={getBlogCategoryLabel(cat, locale)}
                 count={blogPosts.filter((p) => p.category === cat).length}
               />
             ))}
@@ -104,6 +105,17 @@ export function BlogExperience() {
   );
 }
 
+function getBlogCategoryLabel(category: BlogCategory, locale: "fr" | "en") {
+  const labels: Record<BlogCategory, Record<"fr" | "en", string>> = {
+    "Brand Strategy": { fr: "Stratégie de marque", en: "Brand Strategy" },
+    "Web & Digital": { fr: "Web & Digital", en: "Web & Digital" },
+    "Creative Process": { fr: "Processus créatif", en: "Creative Process" },
+    Insights: { fr: "Insights", en: "Insights" },
+  };
+
+  return labels[category][locale];
+}
+
 function FilterButton({
   active,
   onClick,
@@ -141,6 +153,8 @@ function FilterButton({
 }
 
 function FeaturedPost({ post }: { post: BlogPost }) {
+  const { t, locale } = useLocale();
+
   return (
     <Link
       to="/blog/$slug"
@@ -155,7 +169,7 @@ function FeaturedPost({ post }: { post: BlogPost }) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/30 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-brand-black/20 lg:to-brand-black/60" />
         <span className="absolute top-4 left-4 font-mono text-[9px] uppercase tracking-[0.2em] text-brand-accent px-3 py-1 rounded-full border border-brand-accent/30 bg-brand-black/50 backdrop-blur">
-          Featured
+          {t("blog.featured")}
         </span>
       </div>
       <div className="lg:col-span-5 p-6 md:p-8 lg:p-10 flex flex-col justify-center">
@@ -167,7 +181,7 @@ function FeaturedPost({ post }: { post: BlogPost }) {
           {post.excerpt}
         </p>
         <span className="mt-6 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] font-semibold text-brand-accent">
-          Read article
+          {t("blog.readArticle")}
           <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </span>
       </div>
@@ -176,6 +190,8 @@ function FeaturedPost({ post }: { post: BlogPost }) {
 }
 
 function PostCard({ post, index }: { post: BlogPost; index: number }) {
+  const { t } = useLocale();
+
   return (
     <Link
       to="/blog/$slug"
@@ -203,7 +219,7 @@ function PostCard({ post, index }: { post: BlogPost; index: number }) {
           {post.excerpt}
         </p>
         <span className="mt-4 pt-4 border-t border-brand-white/[0.06] text-[10px] font-mono uppercase tracking-widest text-brand-white/35 group-hover:text-brand-accent transition-colors">
-          Read →
+          {t("blog.readMore")}
         </span>
       </div>
     </Link>
@@ -211,9 +227,11 @@ function PostCard({ post, index }: { post: BlogPost; index: number }) {
 }
 
 function PostMeta({ post }: { post: BlogPost }) {
+  const { locale } = useLocale();
+
   return (
     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[9px] font-mono uppercase tracking-[0.16em] text-brand-white/40">
-      <span className="text-brand-accent">{post.category}</span>
+      <span className="text-brand-accent">{getBlogCategoryLabel(post.category, locale)}</span>
       <span>{formatBlogDate(post.date)}</span>
       <span className="inline-flex items-center gap-1">
         <Clock size={10} />
@@ -224,6 +242,7 @@ function PostMeta({ post }: { post: BlogPost }) {
 }
 
 export function BlogPostExperience({ post }: { post: BlogPost }) {
+  const { locale, t } = useLocale();
   const related = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
   return (
@@ -237,11 +256,11 @@ export function BlogPostExperience({ post }: { post: BlogPost }) {
             to="/blog"
             className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-brand-white/45 hover:text-brand-accent transition-colors mb-6"
           >
-            ← Back to journal
+            {t("blog.back")}
           </Link>
 
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[9px] font-mono uppercase tracking-[0.16em] text-brand-white/40 mb-4">
-            <span className="text-brand-accent">{post.category}</span>
+            <span className="text-brand-accent">{getBlogCategoryLabel(post.category, locale)}</span>
             <span>{formatBlogDate(post.date)}</span>
             <span className="inline-flex items-center gap-1">
               <Clock size={10} />
@@ -311,7 +330,7 @@ export function BlogPostExperience({ post }: { post: BlogPost }) {
         <section className="px-6 pb-16 md:pb-24 border-t border-brand-white/[0.06] pt-14 md:pt-16">
           <div className="container mx-auto">
             <h2 className="font-mono text-[10px] uppercase tracking-[0.3em] text-brand-accent mb-8">
-              More from the journal
+              {t("blog.moreFrom")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {related.map((p, i) => (

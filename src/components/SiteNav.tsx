@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/logo-signature.jpg";
 import { LetsTalkButton } from "@/components/AppointmentModal";
+import { LanguageToggle } from "@/components/LanguageToggle";
+import { useLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
-const links = [
-  { to: "/", label: "Home", index: "01" },
-  { to: "/projets", label: "Projects", index: "02" },
-  { to: "/agence", label: "Agency", index: "03" },
-  { to: "/blog", label: "Blog", index: "04" },
-  { to: "/contact", label: "Contact", index: "05" },
+const linkKeys = [
+  { to: "/", key: "nav.home" as const, index: "01" },
+  { to: "/projets", key: "nav.projects" as const, index: "02" },
+  { to: "/agence", key: "nav.agency" as const, index: "03" },
+  { to: "/blog", key: "nav.blog" as const, index: "04" },
+  { to: "/contact", key: "nav.contact" as const, index: "05" },
 ] as const;
 
 function NavLink({
@@ -55,6 +57,7 @@ function NavLink({
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { t } = useLocale();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -131,11 +134,11 @@ export function SiteNav() {
             className="absolute left-1/2 hidden -translate-x-1/2 md:flex lg:gap-2"
           >
             <ul className="flex items-center gap-1 lg:gap-2">
-              {links.map((l) => (
+              {linkKeys.map((l) => (
                 <li key={l.to}>
                   <NavLink
                     to={l.to}
-                    label={l.label}
+                    label={t(l.key)}
                     index={l.index}
                     exact={l.to === "/"}
                     className="px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-white/75 hover:text-brand-white lg:px-5"
@@ -146,6 +149,10 @@ export function SiteNav() {
           </nav>
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+            <div className="hidden sm:block">
+              <LanguageToggle />
+            </div>
+
             <LetsTalkButton className="rounded-full bg-brand-accent px-4 py-2 text-[10px] font-bold uppercase tracking-[0.15em] text-brand-black transition-colors duration-300 hover:bg-brand-white sm:px-5 sm:py-2.5 sm:text-[11px]" />
 
             <button
@@ -155,7 +162,7 @@ export function SiteNav() {
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((open) => !open)}
             >
-              <span className="sr-only">{menuOpen ? "Fermer" : "Menu"}</span>
+              <span className="sr-only">{menuOpen ? t("nav.closeMenu") : t("nav.menu")}</span>
               <span className="relative h-4 w-6">
                 <span
                   className={cn(
@@ -205,12 +212,12 @@ export function SiteNav() {
         >
           <div className="flex items-center justify-between px-5 pt-5 sm:px-8">
             <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-white/40">
-              Menu
+              {t("nav.menu")}
             </span>
             <button
               type="button"
               className="flex h-11 w-11 items-center justify-center text-brand-white/60"
-              aria-label="Fermer le menu"
+              aria-label={t("nav.closeMenu")}
               onClick={() => setMenuOpen(false)}
             >
               <span className="text-2xl leading-none">&times;</span>
@@ -218,7 +225,7 @@ export function SiteNav() {
           </div>
 
           <ul className="flex flex-1 flex-col justify-center gap-2 px-5 pb-8 sm:px-8">
-            {links.map((l, i) => (
+            {linkKeys.map((l, i) => (
               <li
                 key={l.to}
                 className={cn(
@@ -241,7 +248,7 @@ export function SiteNav() {
                     {l.index}
                   </span>
                   <span className="title-display text-3xl font-medium tracking-tight text-brand-white transition-colors group-hover:text-brand-accent sm:text-4xl">
-                    {l.label}
+                    {t(l.key)}
                   </span>
                 </Link>
               </li>
@@ -255,9 +262,14 @@ export function SiteNav() {
             )}
             style={{ transitionDelay: menuOpen ? "320ms" : "0ms" }}
           >
-            <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-white/40">
-              Start a project
-            </p>
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-white/40">
+                {t("nav.startProject")}
+              </p>
+              <div className="sm:hidden">
+                <LanguageToggle />
+              </div>
+            </div>
             <LetsTalkButton className="w-full rounded-full bg-brand-accent py-4 text-[11px] font-bold uppercase tracking-[0.15em] text-brand-black transition-colors hover:bg-brand-white" />
           </div>
         </nav>

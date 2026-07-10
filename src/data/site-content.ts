@@ -30,7 +30,7 @@ export const clients = [
 
 /** Studio photography for the Agency page (images 1–10) */
 export const agencyImages = {
-  hero: { src: "/images/agency-7.jpg", alt: "Creative director — Signature Brand studio", position: "object-[center_20%]" },
+  hero: { src: "/images/agency-7.jpg", alt: "Brand strategist — Signature Brand studio", position: "object-[center_20%]" },
   services: [
     { src: "/images/agency-1.jpg", alt: "Brand strategy session", position: "object-center" },
     { src: "/images/agency-2.jpg", alt: "Digital craft and production", position: "object-center" },
@@ -39,7 +39,7 @@ export const agencyImages = {
   ],
   approach: [
     { src: "/images/agency-5.jpg", alt: "Personal branding", position: "object-[center_15%]" },
-    { src: "/images/agency-6.jpg", alt: "Creative studio workspace", position: "object-center" },
+    { src: "/images/agency-6.jpg", alt: "Premium studio workspace", position: "object-center" },
     { src: "/images/agency-8.jpg", alt: "Team collaboration", position: "object-center" },
     { src: "/images/agency-9.jpg", alt: "Strategic positioning", position: "object-center" },
   ],
@@ -241,7 +241,7 @@ export const heroSlides = [
     image: agencyImages.hero.src,
     imageAlt: agencyImages.hero.alt,
     imagePosition: agencyImages.hero.position,
-    tag: "Creative Strategy",
+    tag: "Brand Strategy",
     title: "We shape",
     titleAccent: "your signature.",
     description:

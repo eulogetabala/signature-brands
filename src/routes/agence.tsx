@@ -5,10 +5,10 @@ import { AgencyExperience } from "@/components/AgencyExperience";
 export const Route = createFileRoute("/agence")({
   head: () => ({
     meta: [
-      { title: "Agency — Signature Brand" },
-      { name: "description", content: "Signature Brand: an independent creative studio crafting extraordinary identities." },
-      { property: "og:title", content: "Agency — Signature Brand" },
-      { property: "og:description", content: "An independent creative studio for ambitious brands." },
+      { title: "About — Signature Brand" },
+      { name: "description", content: "Signature Brand: an independent premium brand consultancy crafting extraordinary identities." },
+      { property: "og:title", content: "About — Signature Brand" },
+      { property: "og:description", content: "An independent premium brand consultancy for ambitious brands." },
     ],
   }),
   component: Agence,
