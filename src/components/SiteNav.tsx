@@ -10,7 +10,7 @@ const linkKeys = [
   { to: "/", key: "nav.home" as const, index: "01" },
   { to: "/projets", key: "nav.projects" as const, index: "02" },
   { to: "/agence", key: "nav.agency" as const, index: "03" },
-  { to: "/blog", key: "nav.blog" as const, index: "04" },
+  // { to: "/blog", key: "nav.blog" as const, index: "04" },
   { to: "/contact", key: "nav.contact" as const, index: "05" },
 ] as const;
 
