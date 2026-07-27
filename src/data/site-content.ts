@@ -54,89 +54,6 @@ export function photoBgPosition(position: string): string {
   return "center center";
 }
 
-export const webProjects: Project[] = [
-  {
-    id: "hub-distribution",
-    title: "Hub Distribution",
-    subtitle: "Sustainable Commerce & E-Commerce",
-    category: "Web Projects",
-    year: "2024",
-    img: "/images/web-1.png",
-    website: "https://hub-distribution.com",
-    description:
-      "A full digital storefront for Hub Group — promoting sustainable economic development in the Republic of Congo. Custom product journeys for KONGO cassava flour and NZOKO premium chocolate lines.",
-    highlights: [
-      "KONGO Cassava Flour (Foufou)",
-      "NZOKO Dark Chocolate 75%",
-      "NZOKO 100% No Added Sugar",
-      "NZOKO Cardamom Dark Chocolate",
-    ],
-    tags: ["E-Commerce", "Packaging UI", "Brand Storytelling"],
-  },
-  {
-    id: "amc-assurances",
-    title: "AMC Assurances",
-    subtitle: "Your Protection, Always",
-    category: "Web Projects",
-    year: "2024",
-    img: "/images/web-2.png",
-    website: "https://amc-assurances.com",
-    description:
-      "Corporate insurance platform with a trust-first UX. Travel, auto, and business coverage presented through clear service cards and partner integrations.",
-    highlights: ["Travel Insurance", "Auto Insurance", "Equipment Breakdown", "Partner Ecosystem"],
-    tags: ["Insurance", "Corporate", "UX Strategy"],
-  },
-  {
-    id: "bch",
-    title: "BCH",
-    subtitle: "Banque de Crédit de l'Habitat",
-    category: "Web Projects",
-    year: "2023",
-    img: "/images/web-3.png",
-    description:
-      "Digital banking experience for credits, insurance, and payment cards. Structured service grids and savings campaigns designed for clarity and conversion.",
-    highlights: ["Credit Products", "Insurance Suite", "Monetary Cards", "KOLO L'OPANGO Savings"],
-    tags: ["Finance", "Banking", "Kinshasa"],
-  },
-  {
-    id: "bgfibank",
-    title: "BGFIBank Congo",
-    subtitle: "Your Partner for the Future",
-    category: "Web Projects",
-    year: "2023",
-    img: "/images/web-4.png",
-    description:
-      "Institutional banking portal with segmented audiences — individuals, SMEs, private banking, and corporate clients. News-driven homepage with service highlight cards.",
-    highlights: ["MyBGFIBank CG", "Leadership News", "Community Impact", "Bancassurance"],
-    tags: ["Finance", "Corporate", "Multi-segment"],
-  },
-  {
-    id: "maison-zuri",
-    title: "Maison Zuri",
-    subtitle: "Everyday Elegance",
-    category: "Web Projects",
-    year: "2024",
-    img: "/images/web-5.png",
-    gallery: ["/images/web-5.png", "/images/web-7.png"],
-    description:
-      "Luxury fashion e-commerce with a minimalist black-and-white aesthetic. Hero carousel, product storytelling, and commitment pillars — Elegant, Durable, Accessible, Selective.",
-    highlights: ["Collection Showcase", "Brand Commitment", "Newsletter Integration", "Premium Typography"],
-    tags: ["Fashion", "E-Commerce", "Luxury"],
-  },
-  {
-    id: "agence-360",
-    title: "Agence 360°",
-    subtitle: "Digital Innovation Within Reach",
-    category: "Web Projects",
-    year: "2024",
-    img: "/images/web-6.png",
-    description:
-      "360° communication agency landing page — audiovisual production, digital strategy, and consulting. Dark hero with methodology steps from identification to execution.",
-    highlights: ["Audiovisual Production", "Digital Strategy", "Consulting", "4-Step Methodology"],
-    tags: ["Agency", "360°", "Motion"],
-  },
-];
-
 export const graphicProjects: Project[] = [
   {
     id: "le-guide-du-congo",
@@ -224,7 +141,7 @@ export const graphicProjects: Project[] = [
   },
 ];
 
-export const allProjects: Project[] = [...webProjects, ...graphicProjects];
+export const allProjects: Project[] = [...graphicProjects];
 
 export const heroSlides = [
   {

@@ -40,6 +40,16 @@ export function ContactExperience() {
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      email: formData.get("email"),
+      company: formData.get("company"),
+      projectType: formData.get("projectType"),
+      budget: formData.get("budget"),
+      message: formData.get("message"),
+    };
     setSent(true);
   }
 
@@ -67,7 +77,7 @@ export function ContactExperience() {
                 <span className="h-px flex-1 max-w-[64px] bg-brand-accent/30" />
               </div>
               <h1 className="contact-fade-up contact-delay-1 title-display-hero text-[clamp(2.5rem,8vw,5rem)] leading-[0.96]">
-                {t("contact.title")} {" "}
+                {t("contact.title")}{" "}
                 <span className="text-outline title-accent">{t("contact.title")}</span>
                 <span className="text-brand-white">.</span>
               </h1>
@@ -99,8 +109,8 @@ export function ContactExperience() {
               <ContactCard
                 icon={Mail}
                 label={t("contact.email")}
-                href="mailto:hello@signaturebrand.com"
-                value="hello@signaturebrand.com"
+                href="mailto:contact@signaturebrand.pro"
+                value="contact@signaturebrand.pro"
               />
 
               <div className="rounded-2xl border border-brand-white/[0.08] bg-brand-white/[0.03] p-5 hover:border-brand-accent/30 transition-colors">
@@ -116,7 +126,11 @@ export function ContactExperience() {
 
               <ContactCard icon={MapPin} label={t("contact.studio")} value={t("footer.country")} />
 
-              <ContactCard icon={Clock} label={t("contact.responseTime")} value="24–48 business hours" />
+              <ContactCard
+                icon={Clock}
+                label={t("contact.responseTime")}
+                value="24–48 business hours"
+              />
 
               <div className="rounded-2xl border border-brand-white/[0.08] bg-brand-white/[0.03] p-5">
                 <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-brand-white/40 block mb-4">
@@ -168,11 +182,16 @@ export function ContactExperience() {
                         {t("contact.projectBrief")}
                       </span>
                       <h2 className="title-display text-2xl md:text-3xl font-medium leading-tight">
-                        {t("contact.ambition").split(" ").slice(0, -1).join(" ")} {" "}
-                        <span className="title-accent text-gold-gradient">{t("contact.ambition").split(" ").slice(-1)[0]}</span>
+                        {t("contact.ambition").split(" ").slice(0, -1).join(" ")}{" "}
+                        <span className="title-accent text-gold-gradient">
+                          {t("contact.ambition").split(" ").slice(-1)[0]}
+                        </span>
                       </h2>
                     </div>
-                    <MessageCircle size={22} className="text-brand-white/15 shrink-0 hidden sm:block" />
+                    <MessageCircle
+                      size={22}
+                      className="text-brand-white/15 shrink-0 hidden sm:block"
+                    />
                   </div>
 
                   {sent ? (
@@ -196,18 +215,47 @@ export function ContactExperience() {
                   ) : (
                     <form onSubmit={onSubmit} className="space-y-5">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <FormField label={t("contact.firstName")} name="firstName" required autoComplete="given-name" />
-                        <FormField label={t("contact.lastName")} name="lastName" required autoComplete="family-name" />
+                        <FormField
+                          label={t("contact.firstName")}
+                          name="firstName"
+                          required
+                          autoComplete="given-name"
+                        />
+                        <FormField
+                          label={t("contact.lastName")}
+                          name="lastName"
+                          required
+                          autoComplete="family-name"
+                        />
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <FormField label={t("contact.email")} name="email" type="email" required autoComplete="email" />
-                        <FormField label={t("contact.company")} name="company" autoComplete="organization" />
+                        <FormField
+                          label={t("contact.email")}
+                          name="email"
+                          type="email"
+                          required
+                          autoComplete="email"
+                        />
+                        <FormField
+                          label={t("contact.company")}
+                          name="company"
+                          autoComplete="organization"
+                        />
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <SelectField label={t("contact.projectType")} name="projectType" required options={projectTypes} />
-                        <SelectField label={t("contact.budget")} name="budget" options={budgetRanges} />
+                        <SelectField
+                          label={t("contact.projectType")}
+                          name="projectType"
+                          required
+                          options={projectTypes}
+                        />
+                        <SelectField
+                          label={t("contact.budget")}
+                          name="budget"
+                          options={budgetRanges}
+                        />
                       </div>
 
                       <TextareaField label={t("contact.project")} name="message" required />
@@ -343,13 +391,19 @@ function SelectField({
   options: readonly string[];
   required?: boolean;
 }) {
+  const { t } = useLocale();
   return (
     <label className="block group">
       <span className="text-[10px] uppercase tracking-[0.22em] text-brand-white/50 group-focus-within:text-brand-accent transition-colors">
         {label}
         {required && <span className="text-brand-accent"> *</span>}
       </span>
-      <select name={name} required={required} defaultValue="" className={cn(fieldClass, "cursor-pointer appearance-none")}>
+      <select
+        name={name}
+        required={required}
+        defaultValue=""
+        className={cn(fieldClass, "cursor-pointer appearance-none")}
+      >
         <option value="" disabled className="bg-brand-black">
           {t("contact.select")}
         </option>
@@ -372,6 +426,7 @@ function TextareaField({
   name: string;
   required?: boolean;
 }) {
+  const { t } = useLocale();
   return (
     <label className="block group">
       <span className="text-[10px] uppercase tracking-[0.22em] text-brand-white/50 group-focus-within:text-brand-accent transition-colors">

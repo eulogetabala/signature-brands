@@ -17,14 +17,12 @@ import {
   ChevronLeft,
   ChevronRight,
   ExternalLink,
-  Globe,
   Layers,
   Palette,
   Sparkles,
 } from "lucide-react";
 import {
   allProjects,
-  webProjects,
   graphicProjects,
   agencyImages,
   type Project,
@@ -35,7 +33,6 @@ import { cn } from "@/lib/utils";
 
 type Tab = "All" | ProjectCategory;
 
-const webBento = ["lg:col-span-8", "lg:col-span-4", "lg:col-span-4", "lg:col-span-4", "lg:col-span-8", "lg:col-span-4"];
 const graphicBento = [
   "lg:col-span-7",
   "lg:col-span-5",
@@ -49,21 +46,11 @@ const graphicBento = [
 export function ProjectsExperience() {
   const { t } = useLocale();
   const [activeTab, setActiveTab] = useState<Tab>("All");
-  const tabs: { id: Tab; label: string; short: string; icon: typeof Globe; count: number }[] = [
+  const tabs: { id: Tab; label: string; short: string; icon: typeof Layers; count: number }[] = [
     { id: "All", label: t("projects.allWorks"), short: t("projects.allWorks"), icon: Layers, count: allProjects.length },
-    { id: "Web Projects", label: t("projects.webProjects"), short: t("projects.web"), icon: Globe, count: webProjects.length },
-    {
-      id: "Graphic Identity Projects",
-      label: t("projects.graphicIdentity"),
-      short: t("projects.graphic"),
-      icon: Palette,
-      count: graphicProjects.length,
-    },
   ];
   const capabilityPills: Record<Tab, string[]> = {
-    All: [t("projects.allWorks"), t("projects.webProjects"), t("projects.graphicIdentity"), t("projects.ourProcess"), t("projects.spotlight")],
-    "Web Projects": ["UX Strategy", "Front-end", "E-Commerce", "Institutional", "Performance"],
-    "Graphic Identity Projects": ["Logo Systems", "Print", "Social Kits", "Campaigns", "Packaging"],
+    All: [t("projects.allWorks"), t("projects.graphicIdentity"), t("projects.ourProcess"), t("projects.spotlight")],
   };
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [spotlightIndex, setSpotlightIndex] = useState(0);
@@ -74,10 +61,8 @@ export function ProjectsExperience() {
   );
 
   const spotlightPool = useMemo(() => {
-    if (activeTab === "Web Projects") return webProjects;
-    if (activeTab === "Graphic Identity Projects") return graphicProjects;
-    return [webProjects[0], graphicProjects[0], webProjects[4], graphicProjects[3]];
-  }, [activeTab]);
+    return graphicProjects.slice(0, 4);
+  }, []);
 
   const spotlight = spotlightPool[spotlightIndex % spotlightPool.length];
 
@@ -151,9 +136,8 @@ export function ProjectsExperience() {
             </div>
 
             <div className="lg:col-span-5 xl:col-span-4 projects-fade-up projects-delay-3">
-              <div className="grid grid-cols-3 gap-2 md:gap-3">
+              <div className="grid grid-cols-2 gap-2 md:gap-3">
                 <StatCard value={String(allProjects.length).padStart(2, "0")} label={t("projects.allWorks")} accent />
-                <StatCard value={String(webProjects.length).padStart(2, "0")} label={t("projects.web")} />
                 <StatCard value={String(graphicProjects.length).padStart(2, "0")} label={t("projects.graphic")} />
               </div>
               <Link
@@ -223,11 +207,7 @@ export function ProjectsExperience() {
                 <div>
                   <div className="flex items-center justify-between gap-3 mb-5">
                     <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.25em] text-brand-accent px-3 py-1 rounded-full border border-brand-accent/25">
-                      {spotlight.category === "Web Projects" ? (
-                        <Globe size={11} />
-                      ) : (
-                        <Palette size={11} />
-                      )}
+                      <Palette size={11} />
                       {t("projects.spotlight")}
                     </span>
                     <span className="font-mono text-[10px] text-brand-white/35 tracking-widest">
@@ -334,30 +314,15 @@ export function ProjectsExperience() {
 
       {/* Grid */}
       <div key={activeTab} className="projects-grid-fade">
-        {(activeTab === "All" || activeTab === "Web Projects") && (
-          <CategorySection
-            index="01"
-            title={t("projects.webSectionTitle")}
-            subtitle={t("projects.webSectionCopy")}
-            headerImg="/images/web_projects_header.png"
-            projects={activeTab === "All" ? webProjects : filteredProjects}
-            bento={webBento}
-            onSelect={setSelectedProject}
-          />
-        )}
-
-        {(activeTab === "All" || activeTab === "Graphic Identity Projects") && (
-          <CategorySection
-            index="02"
-            title={t("projects.graphicSectionTitle")}
-            subtitle={t("projects.graphicSectionCopy")}
-            headerImg="/images/graphic_projects_header.png"
-            projects={activeTab === "All" ? graphicProjects : filteredProjects}
-            bento={graphicBento}
-            onSelect={setSelectedProject}
-            className={activeTab === "All" ? "border-t border-brand-white/[0.06]" : ""}
-          />
-        )}
+        <CategorySection
+          index="01"
+          title={t("projects.graphicSectionTitle")}
+          subtitle={t("projects.graphicSectionCopy")}
+          headerImg="/images/graphic_projects_header.png"
+          projects={filteredProjects}
+          bento={graphicBento}
+          onSelect={setSelectedProject}
+        />
       </div>
 
       {/* Modal */}
@@ -399,12 +364,8 @@ export function ProjectsExperience() {
                 <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 z-[2]">
                   <div className="flex flex-wrap items-center gap-3 mb-3">
                     <span className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-brand-accent px-3 py-1.5 bg-brand-black/60 border border-brand-accent/30 rounded-full backdrop-blur">
-                      {selectedProject.category === "Web Projects" ? (
-                        <Globe size={11} />
-                      ) : (
-                        <Palette size={11} />
-                      )}
-                      {selectedProject.category === "Web Projects" ? t("projects.webProjects") : t("projects.graphicIdentity")}
+                      <Palette size={11} />
+                      {t("projects.graphicIdentity")}
                     </span>
                     <span className="font-mono text-[10px] text-brand-white/40 tracking-widest">
                       {String(selectedIndex + 1).padStart(2, "0")} / {String(filteredProjects.length).padStart(2, "0")}
@@ -617,6 +578,7 @@ function CategorySection({
   onSelect: (p: Project) => void;
   className?: string;
 }) {
+  const { t } = useLocale();
   if (projects.length === 0) return null;
 
   return (
@@ -668,7 +630,7 @@ function ProjectCard({
   spanClass: string;
   onSelect: () => void;
 }) {
-  const isWeb = p.category === "Web Projects";
+  const { t } = useLocale();
   const isWide = spanClass.includes("col-span-7") || spanClass.includes("col-span-8");
 
   return (
@@ -717,8 +679,8 @@ function ProjectCard({
 
         <div className="absolute inset-x-0 bottom-0 p-4 md:p-5 z-10">
           <span className="inline-flex items-center gap-1.5 text-[8px] font-mono uppercase tracking-[0.18em] text-brand-accent px-2 py-0.5 bg-brand-accent/10 border border-brand-accent/20 rounded-full mb-2.5">
-            {isWeb ? <Globe size={9} /> : <Palette size={9} />}
-            {isWeb ? t("projects.web") : t("projects.graphic")}
+            <Palette size={9} />
+            {t("projects.graphic")}
           </span>
           <h3 className="title-display text-lg md:text-xl lg:text-2xl font-medium text-brand-white group-hover:text-brand-accent transition-colors duration-300 leading-tight">
             {p.title}

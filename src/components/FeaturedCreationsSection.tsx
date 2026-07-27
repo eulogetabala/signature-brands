@@ -1,13 +1,13 @@
 import { useState, useCallback } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
-import { webProjects, graphicProjects, type Project } from "@/data/site-content";
+import { graphicProjects, type Project } from "@/data/site-content";
 import { useLocale } from "@/lib/i18n";
 
 const featuredCases: Project[] = [
-  webProjects[0],
-  webProjects[4],
   graphicProjects[0],
+  graphicProjects[1],
+  graphicProjects[2],
   graphicProjects[3],
 ];
 
@@ -93,7 +93,7 @@ export function FeaturedCreationsSection() {
               <div>
                 <div className="flex items-center justify-between gap-4 mb-6">
                   <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-brand-accent px-3 py-1 rounded-full border border-brand-accent/25">
-                    {project.category === "Web Projects" ? t("projects.webProjects") : t("projects.graphicIdentity")}
+                    {t("projects.graphicIdentity")}
                   </span>
                   <span className="font-mono text-[10px] text-brand-white/35 tracking-widest">
                     Case {String(active + 1).padStart(2, "0")} / 04
