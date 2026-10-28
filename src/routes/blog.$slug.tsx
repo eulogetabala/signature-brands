@@ -1,35 +1,25 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { BlogPostExperience } from "@/components/BlogExperience";
-import { getBlogPost } from "@/data/blog-content";
+import { blogPostExists } from "@/data/blog-content";
 
 export const Route = createFileRoute("/blog/$slug")({
-  head: ({ params }) => {
-    const post = getBlogPost(params.slug);
-    if (!post) return { meta: [{ title: "Article not found — Signature Brand" }] };
-    return {
-      meta: [
-        { title: `${post.title} — Signature Brand` },
-        { name: "description", content: post.excerpt },
-        { property: "og:title", content: post.title },
-        { property: "og:description", content: post.excerpt },
-      ],
-    };
-  },
+  head: () => ({
+    meta: [{ title: "Signature Brand" }],
+  }),
   loader: ({ params }) => {
-    const post = getBlogPost(params.slug);
-    if (!post) throw notFound();
-    return post;
+    if (!blogPostExists(params.slug)) throw notFound();
+    return { slug: params.slug };
   },
   component: BlogPost,
 });
 
 function BlogPost() {
-  const post = Route.useLoaderData();
+  const { slug } = Route.useLoaderData();
 
   return (
     <PageShell>
-      <BlogPostExperience post={post} />
+      <BlogPostExperience slug={slug} />
     </PageShell>
   );
 }

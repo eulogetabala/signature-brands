@@ -1,12 +1,17 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import { Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { EcosystemSection } from "@/components/EcosystemSection";
-import { useState, useEffect, useCallback } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { ApproachSection } from "@/components/ApproachSection";
 import { ExpertiseSection } from "@/components/ExpertiseSection";
 import { FeaturedCreationsSection } from "@/components/FeaturedCreationsSection";
-import { heroSlides } from "@/data/site-content";
+import { useSiteContent } from "@/i18n/content";
+import { useTranslation } from "@/i18n/context";
+import { useDocumentTitle } from "@/i18n/useDocumentTitle";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,8 +26,12 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const { t } = useTranslation();
+  const { heroSlides } = useSiteContent();
+  useDocumentTitle(t.meta.homeTitle);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [textKey, setTextKey] = useState(0);
+
   const goToSlide = useCallback((index: number) => {
     setCurrentSlide(index);
     setTextKey((k) => k + 1);
@@ -30,11 +39,11 @@ function Home() {
 
   const nextSlide = useCallback(() => {
     goToSlide((currentSlide + 1) % heroSlides.length);
-  }, [currentSlide, goToSlide]);
+  }, [currentSlide, goToSlide, heroSlides.length]);
 
   const prevSlide = useCallback(() => {
     goToSlide((currentSlide - 1 + heroSlides.length) % heroSlides.length);
-  }, [currentSlide, goToSlide]);
+  }, [currentSlide, goToSlide, heroSlides.length]);
 
   useEffect(() => {
     const interval = setInterval(nextSlide, 7000);
@@ -66,7 +75,6 @@ function Home() {
         .anim-progress { animation: progressBar 7s linear forwards; }
       `}</style>
 
-      {/* HERO */}
       <section className="relative h-[min(86svh,820px)] min-h-[520px] w-full overflow-hidden bg-brand-black">
         {heroSlides.map((s, i) => {
           const isActive = currentSlide === i;
@@ -93,7 +101,6 @@ function Home() {
           );
         })}
 
-        {/* Animated ambient overlays */}
         <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
           <div className="absolute -top-1/4 -right-1/4 w-[70%] h-[70%] rounded-full bg-brand-accent/15 blur-[120px] animate-hero-glow" />
           <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-brand-black/80 to-transparent" />
@@ -123,14 +130,14 @@ function Home() {
                   to="/projets"
                   className="group flex items-center gap-2 px-7 py-3.5 bg-brand-accent text-brand-black text-[10px] uppercase tracking-widest font-bold rounded-full hover:bg-brand-white transition-colors duration-300"
                 >
-                  View our work
+                  {t.common.viewOurWork}
                   <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
                   to="/contact"
                   className="px-7 py-3.5 border border-brand-white/30 text-[10px] uppercase tracking-widest font-semibold rounded-full hover:bg-brand-white hover:text-brand-black transition-all duration-300"
                 >
-                  Get in touch
+                  {t.common.getInTouch}
                 </Link>
               </div>
             </div>
@@ -141,14 +148,14 @@ function Home() {
           <button
             onClick={prevSlide}
             className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-brand-white/70 hover:bg-brand-accent hover:text-brand-black hover:border-brand-accent transition-all duration-300"
-            aria-label="Previous slide"
+            aria-label={t.common.previousSlide}
           >
             <ChevronLeft size={18} />
           </button>
           <button
             onClick={nextSlide}
             className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-brand-white/70 hover:bg-brand-accent hover:text-brand-black hover:border-brand-accent transition-all duration-300"
-            aria-label="Next slide"
+            aria-label={t.common.nextSlide}
           >
             <ChevronRight size={18} />
           </button>
@@ -162,7 +169,7 @@ function Home() {
               className={`relative h-1 rounded-full overflow-hidden transition-all duration-500 ${
                 currentSlide === i ? "w-16 bg-white/20" : "w-3 bg-white/30 hover:bg-white/50"
               }`}
-              aria-label={`Go to slide ${i + 1}`}
+              aria-label={`${t.common.goToSlide} ${i + 1}`}
             >
               {currentSlide === i && (
                 <span key={textKey} className="absolute inset-0 bg-brand-accent rounded-full anim-progress" />
@@ -176,11 +183,8 @@ function Home() {
       </section>
 
       <ApproachSection />
-
       <ExpertiseSection />
-
       <EcosystemSection />
-
       <FeaturedCreationsSection />
     </PageShell>
   );

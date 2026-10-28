@@ -8,7 +8,7 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact — Signature Brand" },
       { name: "description", content: "Start your project. Get in touch with Signature Brand." },
       { property: "og:title", content: "Contact — Signature Brand" },
-      { property: "og:description", content: "Start your project — hello@signaturebrand.com" },
+      { property: "og:description", content: "Start your project — contact@signaturebrand.pro" },
     ],
   }),
   component: Contact,

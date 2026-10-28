@@ -1,7 +1,9 @@
 import { clients } from "@/data/site-content";
+import { useTranslation } from "@/i18n/context";
 import { cn } from "@/lib/utils";
 
 export function TrustedPartnersSection() {
+  const { t } = useTranslation();
   return (
     <section className="relative py-12 md:py-16 px-6 bg-brand-white text-brand-black overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-accent-deep/25 to-transparent" />
@@ -10,20 +12,20 @@ export function TrustedPartnersSection() {
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 md:mb-10">
           <div>
             <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-brand-accent-deep block mb-3">
-              (04) Ecosystem
+              {t.trustedPartners.index}
             </span>
             <h2 className="title-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight">
-              Trusted by{" "}
+              {t.trustedPartners.title}{" "}
               <span
                 className="text-outline title-accent"
                 style={{ WebkitTextStrokeColor: "var(--brand-accent-deep)" }}
               >
-                leaders
+                {t.trustedPartners.titleAccent}
               </span>
             </h2>
           </div>
           <p className="text-xs md:text-sm text-neutral-500 font-light max-w-xs sm:text-right leading-relaxed">
-            Banking, telecom, insurance & public sector across Central Africa.
+            {t.trustedPartners.description}
           </p>
         </div>
 
