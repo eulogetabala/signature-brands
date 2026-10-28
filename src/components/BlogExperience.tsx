@@ -241,8 +241,14 @@ function PostMeta({ post }: { post: BlogPost }) {
   );
 }
 
-export function BlogPostExperience({ post }: { post: BlogPost }) {
+export function BlogPostExperience({ slug }: { slug: string }) {
   const { locale, t } = useLocale();
+  const post = blogPosts.find((item) => item.slug === slug) ?? blogPosts[0];
+
+  if (!post) {
+    return null;
+  }
+
   const related = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
   return (

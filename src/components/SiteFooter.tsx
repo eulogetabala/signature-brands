@@ -14,7 +14,6 @@ import {
   Monitor,
   Palette,
   Route,
-  Sparkles,
   Target,
 } from "lucide-react";
 import logo from "@/assets/logo-signature.jpg";
@@ -54,7 +53,7 @@ function StartProjectCta() {
 
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl">
             <a
-              href="mailto:hello@signaturebrand.com"
+              href="mailto:contact@signaturebrand.pro"
               className="group flex flex-col gap-4 p-5 rounded-2xl border border-brand-white/10 bg-brand-white/[0.03] hover:border-brand-accent/35 hover:bg-brand-white/[0.06] transition-all duration-300 h-full"
             >
               <span className="flex items-center justify-between">
@@ -71,7 +70,7 @@ function StartProjectCta() {
                   {t("footer.emailUs")}
                 </span>
                 <span className="title-display text-base md:text-lg font-medium break-all group-hover:text-brand-accent transition-colors leading-snug">
-                  hello@signaturebrand.com
+                  contact@signaturebrand.pro
                 </span>
               </span>
             </a>
@@ -79,7 +78,7 @@ function StartProjectCta() {
             <LetsTalkButton className="group flex flex-col justify-between gap-4 p-5 rounded-2xl bg-brand-accent text-brand-black hover:bg-brand-white transition-colors duration-300 w-full text-left cursor-pointer h-full min-h-[140px]">
               <span className="flex items-center justify-between w-full">
                 <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-brand-black/10">
-                  <Sparkles size={20} strokeWidth={1.75} />
+                  <Mail size={20} strokeWidth={1.75} />
                 </span>
                 <ArrowUpRight
                   size={16}
@@ -175,12 +174,12 @@ export function SiteFooter() {
                 <LanguageToggle />
               </div>
               <a
-                href="mailto:hello@signaturebrand.com"
+                href="mailto:contact@signaturebrand.pro"
                 className="group inline-flex items-center gap-3 px-5 py-3 rounded-full border border-brand-white/10 bg-brand-white/[0.04] hover:border-brand-accent/40 hover:bg-brand-white/[0.06] transition-all"
               >
               <Mail size={16} className="text-brand-accent" />
               <span className="text-sm font-medium text-brand-white/80 group-hover:text-brand-white transition-colors">
-                hello@signaturebrand.com
+                contact@signaturebrand.pro
               </span>
                 <ArrowUpRight
                   size={14}

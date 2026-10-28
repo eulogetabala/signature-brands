@@ -1,41 +1,4 @@
 export const projectsData = {
-  "hub-distribution": {
-    title: "Hub Distribution",
-    subtitle: "Commerce durable & e-commerce",
-    description:
-      "Une vitrine digitale complète pour Hub Group — promouvoir le développement économique durable en République du Congo. Parcours produits sur mesure pour la farine de manioc KONGO et les gammes chocolat premium NZOKO.",
-    highlights: [
-      "Farine de manioc KONGO (Foufou)",
-      "Chocolat noir NZOKO 75%",
-      "NZOKO 100% sans sucre ajouté",
-      "Chocolat noir NZOKO à la cardamome",
-    ],
-    tags: ["E-Commerce", "UI Packaging", "Storytelling de marque"],
-  },
-  "amc-assurances": {
-    title: "AMC Assurances",
-    subtitle: "Votre protection, toujours",
-    description:
-      "Plateforme d'assurance corporate avec une UX axée sur la confiance. Couvertures voyage, auto et entreprise présentées via des fiches services claires et des intégrations partenaires.",
-    highlights: ["Assurance voyage", "Assurance auto", "Bris de matériel", "Écosystème partenaires"],
-    tags: ["Assurance", "Corporate", "Stratégie UX"],
-  },
-  bch: {
-    title: "BCH",
-    subtitle: "Banque de Crédit de l'Habitat",
-    description:
-      "Expérience bancaire digitale pour crédits, assurances et cartes de paiement. Grilles de services structurées et campagnes d'épargne conçues pour la clarté et la conversion.",
-    highlights: ["Produits crédit", "Suite assurance", "Cartes monétiques", "Épargne KOLO L'OPANGO"],
-    tags: ["Finance", "Banque", "Kinshasa"],
-  },
-  bgfibank: {
-    title: "BGFIBank Congo",
-    subtitle: "Votre partenaire pour l'avenir",
-    description:
-      "Portail bancaire institutionnel avec audiences segmentées — particuliers, PME, banque privée et clients corporate. Page d'accueil actualités avec fiches services.",
-    highlights: ["MyBGFIBank CG", "Actualités direction", "Impact communautaire", "Bancassurance"],
-    tags: ["Finance", "Corporate", "Multi-segments"],
-  },
   "maison-zuri": {
     title: "Maison Zuri",
     subtitle: "L'élégance au quotidien",

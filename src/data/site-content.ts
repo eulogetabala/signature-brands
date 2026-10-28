@@ -16,15 +16,11 @@ export interface Project {
 
 export const clients = [
   { name: "MTN", logo: "/images/client-1.png" },
-  { name: "BCH", logo: "/images/client-2.png" },
   { name: "Huawei", logo: "/images/client-3.png" },
   { name: "CIAR", logo: "/images/client-4.png" },
   { name: "FONEA", logo: "/images/client-5.png" },
-  { name: "Hub Distribution", logo: "/images/client-6.png" },
   { name: "AKIENI", logo: "/images/client-7.png" },
-  { name: "AMC Assurances", logo: "/images/client-8.png" },
-  { name: "BGFIBank", logo: "/images/client-9.png" },
-  { name: "Smart Vision Congo", logo: "/images/client-10.png" },
+  { name: "MCFA", logo: "/images/logo-mcfa.png" },
   { name: "ACPE", logo: "/images/client-11.png" },
 ] as const;
 

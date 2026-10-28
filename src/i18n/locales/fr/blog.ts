@@ -33,7 +33,7 @@ export const blogPosts = {
   "digital-trust-finance-sector": {
     title: "Construire la confiance par le design digital dans la finance",
     excerpt:
-      "Les portails d'assurance et plateformes bancaires doivent communiquer sécurité et clarté dès le premier scroll — ce que nous avons appris sur AMC Assurances et BGFIBank.",
+      "Les portails d'assurance et plateformes bancaires doivent communiquer sécurité et clarté dès le premier scroll — ce que nous avons appris des expériences financières orientées digital.",
     readTime: "5 min de lecture",
     content: [
       {
@@ -43,7 +43,7 @@ export const blogPosts = {
       { type: "h2" as const, text: "La clarté avant la décoration" },
       {
         type: "p" as const,
-        text: "Sur des projets comme AMC Assurances et BGFIBank Congo, nous avons priorisé des grilles de services structurées, une typographie lisible et une révélation progressive. Les effets visuels lourds nuisent à la compréhension. La retenue signale le sérieux.",
+        text: "Sur des projets pour des banques et assureurs régionaux, nous avons priorisé des grilles de services structurées, une typographie lisible et une révélation progressive. Les effets visuels lourds nuisent à la compréhension. La retenue signale le sérieux.",
       },
       {
         type: "ul" as const,
@@ -123,15 +123,15 @@ export const blogPosts = {
       },
     ],
   },
-  "ecommerce-ux-hub-distribution": {
-    title: "Leçons UX e-commerce de Hub Distribution",
+  "ecommerce-ux-regional-brand": {
+    title: "Leçons UX e-commerce pour les marques régionales",
     excerpt:
       "Les produits durables ont besoin de storytelling autant que de parcours d'achat — équilibrer mission, découverte produit et conversion sur une boutique régionale.",
     readTime: "6 min de lecture",
     content: [
       {
         type: "p" as const,
-        text: "Hub Distribution promeut le développement économique durable via des produits comme la farine de manioc KONGO et les gammes chocolat NZOKO. Le site devait faire plus que lister des références — il devait porter une mission.",
+        text: "Les marques régionales ont souvent une mission forte et un produit solide, mais moins de marge pour les frictions. Le site doit faire plus que lister des références — il doit expliquer le pourquoi de l'offre et aider les gens à acheter en confiance.",
       },
       { type: "h2" as const, text: "Des parcours produit story-first" },
       {

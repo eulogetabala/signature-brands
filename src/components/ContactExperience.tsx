@@ -11,7 +11,6 @@ import {
   MapPin,
   MessageCircle,
   Send,
-  Sparkles,
 } from "lucide-react";
 import { LetsTalkButton } from "@/components/AppointmentModal";
 import { agencyImages } from "@/data/site-content";
@@ -114,8 +113,7 @@ export function ContactExperience() {
               />
 
               <div className="rounded-2xl border border-brand-white/[0.08] bg-brand-white/[0.03] p-5 hover:border-brand-accent/30 transition-colors">
-                <span className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.2em] text-brand-accent mb-3">
-                  <Sparkles size={14} />
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-brand-accent mb-3 block">
                   {t("contact.preferCall")}
                 </span>
                 <p className="text-sm text-brand-white/50 font-light leading-relaxed mb-4">

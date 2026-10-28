@@ -33,7 +33,7 @@ export const blogPosts = {
   "digital-trust-finance-sector": {
     title: "Building trust through digital design in finance",
     excerpt:
-      "Insurance portals and banking platforms must communicate security and clarity from the first scroll — here's what we learned on AMC Assurances and BGFIBank.",
+      "Insurance portals and banking platforms must communicate security and clarity from the first scroll — here is what we learned from digital-first financial experiences.",
     readTime: "5 min read",
     content: [
       {
@@ -43,7 +43,7 @@ export const blogPosts = {
       { type: "h2" as const, text: "Clarity over decoration" },
       {
         type: "p" as const,
-        text: "On projects like AMC Assurances and BGFIBank Congo, we prioritized structured service grids, legible typography, and progressive disclosure. Heavy visual effects compete with comprehension. Restraint signals seriousness.",
+        text: "On projects for regional insurers and banks, we prioritized structured service grids, legible typography, and progressive disclosure. Heavy visual effects compete with comprehension. Restraint signals seriousness.",
       },
       {
         type: "ul" as const,
@@ -123,15 +123,15 @@ export const blogPosts = {
       },
     ],
   },
-  "ecommerce-ux-hub-distribution": {
-    title: "E-commerce UX lessons from Hub Distribution",
+  "ecommerce-ux-regional-brand": {
+    title: "E-commerce UX lessons for regional brands",
     excerpt:
       "Sustainable products need storytelling as much as checkout flows — balancing mission, product discovery, and conversion on a regional storefront.",
     readTime: "6 min read",
     content: [
       {
         type: "p" as const,
-        text: "Hub Distribution promotes sustainable economic development through products like KONGO cassava flour and NZOKO chocolate lines. The website had to do more than list SKUs — it needed to carry a mission.",
+        text: "Regional brands often have a strong mission and a solid product, but less room for friction. The website must do more than list SKUs — it must explain the why behind the offer and help people buy with confidence.",
       },
       { type: "h2" as const, text: "Story-first product journeys" },
       {

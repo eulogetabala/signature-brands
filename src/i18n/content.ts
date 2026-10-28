@@ -3,10 +3,6 @@ import { useTranslation } from "./context";
 import type { LocalizedBlogPost, LocalizedProject } from "./types";
 
 export const projectBases = [
-  { id: "hub-distribution", category: "web" as const, year: "2024", img: "/images/web-1.png", website: "https://hub-distribution.com" },
-  { id: "amc-assurances", category: "web" as const, year: "2024", img: "/images/web-2.png", website: "https://amc-assurances.com" },
-  { id: "bch", category: "web" as const, year: "2023", img: "/images/web-3.png" },
-  { id: "bgfibank", category: "web" as const, year: "2023", img: "/images/web-4.png" },
   { id: "maison-zuri", category: "web" as const, year: "2024", img: "/images/web-5.png", gallery: ["/images/web-5.png", "/images/web-7.png"] },
   { id: "agence-360", category: "web" as const, year: "2024", img: "/images/web-6.png" },
   { id: "le-guide-du-congo", category: "graphic" as const, year: "2024", img: "/images/design-1.png" },
@@ -23,7 +19,7 @@ export const blogPostBases = [
   { slug: "digital-trust-finance-sector", category: "webDigital" as const, date: "2026-02-28", img: "/images/web-2.png", author: "Signature Brand" },
   { slug: "four-step-brand-methodology", category: "creativeProcess" as const, date: "2026-02-14", img: "/images/agency-5.jpg", author: "Signature Brand" },
   { slug: "personal-branding-leaders-2026", category: "insights" as const, date: "2026-01-22", img: "/images/design-4.png", author: "Signature Brand" },
-  { slug: "ecommerce-ux-hub-distribution", category: "webDigital" as const, date: "2026-01-08", img: "/images/web-1.png", author: "Signature Brand" },
+  { slug: "ecommerce-ux-regional-brand", category: "webDigital" as const, date: "2026-01-08", img: "/images/web-1.png", author: "Signature Brand" },
   { slug: "campaign-design-social-impact", category: "brandStrategy" as const, date: "2025-12-18", img: "/images/design-2.png", author: "Signature Brand" },
 ] as const;
 

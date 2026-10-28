@@ -1,41 +1,4 @@
 export const projectsData = {
-  "hub-distribution": {
-    title: "Hub Distribution",
-    subtitle: "Sustainable Commerce & E-Commerce",
-    description:
-      "A full digital storefront for Hub Group — promoting sustainable economic development in the Republic of Congo. Custom product journeys for KONGO cassava flour and NZOKO premium chocolate lines.",
-    highlights: [
-      "KONGO Cassava Flour (Foufou)",
-      "NZOKO Dark Chocolate 75%",
-      "NZOKO 100% No Added Sugar",
-      "NZOKO Cardamom Dark Chocolate",
-    ],
-    tags: ["E-Commerce", "Packaging UI", "Brand Storytelling"],
-  },
-  "amc-assurances": {
-    title: "AMC Assurances",
-    subtitle: "Your Protection, Always",
-    description:
-      "Corporate insurance platform with a trust-first UX. Travel, auto, and business coverage presented through clear service cards and partner integrations.",
-    highlights: ["Travel Insurance", "Auto Insurance", "Equipment Breakdown", "Partner Ecosystem"],
-    tags: ["Insurance", "Corporate", "UX Strategy"],
-  },
-  bch: {
-    title: "BCH",
-    subtitle: "Banque de Crédit de l'Habitat",
-    description:
-      "Digital banking experience for credits, insurance, and payment cards. Structured service grids and savings campaigns designed for clarity and conversion.",
-    highlights: ["Credit Products", "Insurance Suite", "Monetary Cards", "KOLO L'OPANGO Savings"],
-    tags: ["Finance", "Banking", "Kinshasa"],
-  },
-  bgfibank: {
-    title: "BGFIBank Congo",
-    subtitle: "Your Partner for the Future",
-    description:
-      "Institutional banking portal with segmented audiences — individuals, SMEs, private banking, and corporate clients. News-driven homepage with service highlight cards.",
-    highlights: ["MyBGFIBank CG", "Leadership News", "Community Impact", "Bancassurance"],
-    tags: ["Finance", "Corporate", "Multi-segment"],
-  },
   "maison-zuri": {
     title: "Maison Zuri",
     subtitle: "Everyday Elegance",

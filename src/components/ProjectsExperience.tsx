@@ -19,7 +19,6 @@ import {
   ExternalLink,
   Layers,
   Palette,
-  Sparkles,
 } from "lucide-react";
 import {
   allProjects,
@@ -146,7 +145,7 @@ export function ProjectsExperience() {
               >
                 <span className="flex items-center gap-3 min-w-0">
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-accent/15 text-brand-accent border border-brand-accent/25">
-                    <Sparkles size={16} strokeWidth={1.75} />
+                    <ArrowUpRight size={16} strokeWidth={1.75} />
                   </span>
                   <span className="text-left min-w-0">
                     <span className="block text-[10px] font-mono uppercase tracking-[0.2em] text-brand-white/40">
